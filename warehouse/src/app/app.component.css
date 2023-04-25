@@ -1,0 +1,13 @@
+.main-container{
+    margin: 0 auto;
+    margin-top: 1rem;
+    max-width: 80rem;
+    padding: 0 1rem;
+    text-align: left;
+}
+
+.form-control{
+    -webkit-border-radius: 0;
+       -moz-border-radius: 0;
+            border-radius: 0;
+  }
