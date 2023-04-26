@@ -1,5 +1,5 @@
-<div class="main-container">
-    <div class="signup-form">
+<div>
+    <div *ngIf="!registrationSuccess else registered" class="signup-form registration-container">
         <form [formGroup] = "registrationForm" (ngSubmit)="register()">
             <h2>Register</h2>
             <hr>
@@ -47,4 +47,19 @@
             </div>
         </form>
     </div>
+    <ng-template #registered>
+        <div class="confirmation-container">
+            <h2 class="text-info">Thank you for registering!</h2>
+            <hr>
+        <br>
+        <div></div>
+        <p>Before you can log in, please verify your account. </p>
+        <p>An e-mail has been sent to {{email}}</p> 
+        <br> <hr>
+        <div class="d-flex justify-content-center">
+            <a href= "http://localhost:4200/login" class="link-primary">Log In</a>
+        </div> 
+        </div>
+        
+    </ng-template>
 </div>

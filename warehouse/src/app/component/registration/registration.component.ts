@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RegistrationService } from 'src/app/service/registration.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import * as alertify from 'alertifyjs'
 
 @Component({
   selector: 'app-registration',
@@ -19,18 +20,18 @@ export class RegistrationComponent implements OnInit {
   submitted: boolean = false;
 
   registrationForm = new FormGroup({
-    username:         new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9.]{4,9}$')]),
-    email:            new FormControl('', [Validators.required, Validators.email]),
-    password:         new FormControl('', [Validators.required, Validators.pattern('^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$')]),
-    confirmPassword:  new FormControl('', Validators.required),
+    username: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9.]{4,9}$')]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$')]),
+    confirmPassword: new FormControl('', Validators.required),
   })
 
   ngOnInit(): void {
   }
 
-  register(): void{
+  register(): void {
     this.submitted = true;
-    if(this.registrationForm.valid && (this.password === this.confirmPassword)){
+    if (this.registrationForm.valid && (this.password === this.confirmPassword)) {
       var newUser = {
         username: this.username,
         password: this.password,
@@ -40,8 +41,13 @@ export class RegistrationComponent implements OnInit {
       console.log(newUser)
 
       this.registrationService.createUser(newUser).subscribe({
-        next: () => {alert("Successful registration")},
-        error: () => {alert("Error")}
+        next: () => {
+          this.registrationSuccess = true
+        },
+        error: (error) => {
+          console.log(error)
+          alertify.alert("Oops!", error.error.message)
+        }
       })
     }
   }
