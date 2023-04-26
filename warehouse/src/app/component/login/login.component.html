@@ -1,4 +1,47 @@
 <div class="main-container">
-    <p class="text-info">login works!</p>
+    <div class="signup-form">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <h2 class="form-group d-flex justify-content-center">Log In</h2>
+            <hr>
+            <div class="form-group" style="margin-bottom: 10px;">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-fill"></i></span>
+                    </div>
+                    <input type="text" class="form-control" name="username" formControlName="username"
+                        [ngClass]="{'is-invalid': submitted && loginForm.controls.username.errors}"
+                        placeholder="Username" [(ngModel)]="username" required="required">
+                </div>
+                <div style="margin-left: 40px;">
+                    <span *ngIf="loginForm.value.username && loginForm.controls.username.errors"
+                        style="font-size: 8px; color: red; ">Invalid input
+                    </span>
+                </div>
+            </div>
+            <div class="form-group" style="margin-bottom: 10px;">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-lock-fill"></i></span>
+                    </div>
+                    <input type="password" class="form-control" name="password" formControlName="password"
+                        [ngClass]="{'is-invalid': submitted && loginForm.controls.password.errors}"
+                        placeholder="Password" [(ngModel)]="password" required="required">
+                </div>
+                <div style="margin-left: 40px;">
+                    <span *ngIf="loginForm.value.password && loginForm.controls.password.errors"
+                        style="font-size: 8px; color: red; ">Password must be a combination of lower-case,
+                        upper-case,
+                        numbers and at least 9 characters long
+                    </span>
+                </div>
+            </div>
+            <span *ngIf="invalid"> 
+                <p style="color: red"> <i class="bi bi-exclamation-circle" style="color: red;"></i> Invalid username or password</p>
+            </span>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary btn-sm" style="width: auto;">Log In</button>
+            </div>
+        </form>
+    </div>
 </div>
 

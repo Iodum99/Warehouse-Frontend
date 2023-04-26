@@ -11,18 +11,33 @@
                 <a class="nav-link" routerLink="assets">Assets</a>
               </li>
             </ul>
-            <form class="d-flex">
+            <div *ngIf="authService.isLoggedIn$ | async; else notlogged">
+              <form  class="d-flex">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                      <a class="nav-link" routerLink="login">Log In</a>
+                      <a class="nav-link" routerLink="profile">Profile</a>
                     </li>
                   </ul>
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                      <a class="nav-link" routerLink="register">Register</a>
-                    </li>
-                  </ul>
+                  <button type="button" class="btn btn-primary btn-sm" (click)="authService.logout()" >Log Out</button>
               </form>
+            </div>
+            <div>
+              <ng-template #notlogged>
+                <form  class="d-flex">
+                  <ul class="navbar-nav me-auto">
+                      <li class="nav-item">
+                        <a class="nav-link" routerLink="login">Log In</a>
+                      </li>
+                    </ul>
+                  <ul class="navbar-nav me-auto">
+                      <li class="nav-item">
+                        <a class="nav-link" routerLink="register">Register</a>
+                      </li>
+                    </ul>
+                </form>
+              </ng-template>
+          </div>
+            
           </div>
         </div>
       </nav>
