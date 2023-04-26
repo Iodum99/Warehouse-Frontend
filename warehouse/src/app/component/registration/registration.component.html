@@ -1,68 +1,5 @@
 <div>
-    <div *ngIf="registrationSuccess else registered" class="signup-form registration-container">
-        <form [formGroup]="registrationForm" (ngSubmit)="register()">
-            <h2 class="form-group d-flex justify-content-center">Register</h2>
-            <hr>
-            <div class="form-group" style="margin-bottom: 10px;">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="bi bi-person-fill" style="margin-right: 10px;"></i></span>
-                    <input type="text" class="form-control" name="username" formControlName="username"
-                        [ngClass]="{'is-invalid': submitted && registrationForm.controls.username.errors}"
-                        placeholder="Username" [(ngModel)]="username" required="required">
-                </div>
-                <div style="margin-left: 25px;">
-                    <span *ngIf="registrationForm.value.username && registrationForm.controls.username.errors"
-                        style="font-size: 8px; color: red; ">Invalid input</span>
-                </div>
-            </div>
-            <div class="form-group" style="margin-bottom: 10px;">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="bi bi-envelope-fill"
-                            style="margin-right: 10px;"></i></span>
-                    <input type="email" class="form-control" name="email" formControlName="email"
-                        [ngClass]="{'is-invalid': submitted && registrationForm.controls.email.errors}"
-                        placeholder="Email Address" [(ngModel)]="email" required="required">
-                </div>
-                <div style="margin-left: 25px;">
-                    <span *ngIf="registrationForm.value.email && registrationForm.controls.email.errors"
-                        style="font-size: 8px; color: red; ">Invalid input</span>
-                </div>
-            </div>
-            <div class="form-group" style="margin-bottom: 10px;">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="bi bi-lock-fill" style="margin-right: 10px;"></i></span>
-                    <input type="password" class="form-control" name="password" formControlName="password"
-                        [ngClass]="{'is-invalid': submitted && registrationForm.controls.password.errors}"
-                        placeholder="Password" [(ngModel)]="password" required="required">
-                </div>
-                <div style="margin-left: 25px;">
-                    <span *ngIf="registrationForm.value.password && registrationForm.controls.password.errors"
-                        style="font-size: 8px; color: red; ">Password must be a combination of lower-case, upper-case,
-                        numbers and at least 9 characters long</span>
-                </div>
-            </div>
-            <div class="form-group" style="margin-bottom: 10px;">
-                <div class="input-group">
-                    <span class="input-group-addon">
-                        <i class="bi bi-check" style="margin-right: 10px;"></i>
-                    </span>
-                    <input type="password" class="form-control" name="confirm_password"
-                        formControlName="confirmPassword"
-                        [ngClass]="{'is-invalid': submitted && registrationForm.controls.confirmPassword.errors}"
-                        placeholder="Confirm Password" [(ngModel)]="confirmPassword" required="required">
-                </div>
-                <div style="margin-left: 25px;">
-                    <span *ngIf="registrationForm.value.confirmPassword && confirmPassword != password"
-                        style="font-size: 8px; color: red; ">Passwords do not match</span>
-                </div>
-            </div>
-            <br>
-            <div class="form-group d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary btn-sm ">Register</button>
-            </div>
-        </form>
-    </div>
-    <ng-template #registered>
+    <div *ngIf="registrationSuccess else registration">
         <div class="confirmation-container ">
             <div class="d-flex justify-content-center">
                 <i class="bi bi-check-circle " style="color: rgb(0, 188, 140); font-size: 70px;"></i>
@@ -82,6 +19,70 @@
                 <a href="http://localhost:4200/login" class="link-primary">Log In</a>
             </div>
         </div>
-
+    </div>
+    <ng-template #registration >
+        <div class="signup-form registration-container">
+            <form [formGroup]="registrationForm" (ngSubmit)="register()">
+                <h2 class="form-group d-flex justify-content-center">Register</h2>
+                <hr>
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="bi bi-person-fill" style="margin-right: 10px;"></i></span>
+                        <input type="text" class="form-control" name="username" formControlName="username"
+                            [ngClass]="{'is-invalid': submitted && registrationForm.controls.username.errors}"
+                            placeholder="Username" [(ngModel)]="username" required="required">
+                    </div>
+                    <div style="margin-left: 25px;">
+                        <span *ngIf="registrationForm.value.username && registrationForm.controls.username.errors"
+                            style="font-size: 8px; color: red; ">Invalid input</span>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="bi bi-envelope-fill"
+                                style="margin-right: 10px;"></i></span>
+                        <input type="email" class="form-control" name="email" formControlName="email"
+                            [ngClass]="{'is-invalid': submitted && registrationForm.controls.email.errors}"
+                            placeholder="Email Address" [(ngModel)]="email" required="required">
+                    </div>
+                    <div style="margin-left: 25px;">
+                        <span *ngIf="registrationForm.value.email && registrationForm.controls.email.errors"
+                            style="font-size: 8px; color: red; ">Invalid input</span>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="bi bi-lock-fill" style="margin-right: 10px;"></i></span>
+                        <input type="password" class="form-control" name="password" formControlName="password"
+                            [ngClass]="{'is-invalid': submitted && registrationForm.controls.password.errors}"
+                            placeholder="Password" [(ngModel)]="password" required="required">
+                    </div>
+                    <div style="margin-left: 25px;">
+                        <span *ngIf="registrationForm.value.password && registrationForm.controls.password.errors"
+                            style="font-size: 8px; color: red; ">Password must be a combination of lower-case, upper-case,
+                            numbers and at least 9 characters long</span>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="bi bi-check" style="margin-right: 10px;"></i>
+                        </span>
+                        <input type="password" class="form-control" name="confirm_password"
+                            formControlName="confirmPassword"
+                            [ngClass]="{'is-invalid': submitted && registrationForm.controls.confirmPassword.errors}"
+                            placeholder="Confirm Password" [(ngModel)]="confirmPassword" required="required">
+                    </div>
+                    <div style="margin-left: 25px;">
+                        <span *ngIf="registrationForm.value.confirmPassword && confirmPassword != password"
+                            style="font-size: 8px; color: red; ">Passwords do not match</span>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary btn-sm ">Register</button>
+                </div>
+            </form>      
+        </div>
     </ng-template>
 </div>

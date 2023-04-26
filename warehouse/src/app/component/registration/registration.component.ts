@@ -16,8 +16,8 @@ export class RegistrationComponent implements OnInit {
   password?: string
   confirmPassword?: string
   email?: string
-  registrationSuccess: boolean = false;
-  submitted: boolean = false;
+  registrationSuccess?: boolean
+  submitted?: boolean
 
   registrationForm = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9.]{4,9}$')]),
@@ -27,6 +27,8 @@ export class RegistrationComponent implements OnInit {
   })
 
   ngOnInit(): void {
+    this.submitted = false
+    this.registrationSuccess = false
   }
 
   register(): void {
