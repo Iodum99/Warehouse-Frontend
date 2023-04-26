@@ -44,9 +44,9 @@ export class RegistrationComponent implements OnInit {
         next: () => {
           this.registrationSuccess = true
         },
-        error: (error) => {
-          console.log(error)
-          alertify.alert("Oops!", error.error.message)
+        error: (response) => {
+          console.log(response)
+          alertify.notify(response.error.message, "", 5)
         }
       })
     }
