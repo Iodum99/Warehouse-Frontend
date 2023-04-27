@@ -1,7 +1,6 @@
 <div class="main-container">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-0">
         <div class="container-fluid">
-            <i class="bi bi-cloud-arrow-up-fill" style="margin-right: 2px;"></i> <a class="navbar-brand" href="#">Warehouse</a> 
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -12,14 +11,6 @@
               </li>
             </ul>
             <div *ngIf="authService.isLoggedIn$ | async; else notlogged">
-              <form  class="d-flex">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                      <a class="nav-link" routerLink="profile">Profile</a>
-                    </li>
-                  </ul>
-                  <button type="button" class="btn btn-primary btn-sm" (click)="authService.logout()" >Log Out</button>
-              </form>
             </div>
             <div>
               <ng-template #notlogged>

@@ -1,0 +1,23 @@
+<div class="main-container">
+    <div class="row">
+        <div class="col-6">
+            <h3 class="text-info">
+                <i class="bi bi-cloud-arrow-up-fill" style="margin-right: 2px;"></i>
+                Warehouse
+            </h3>
+        </div>
+        <div class="col-6">
+            <div class="dropdown d-flex flex-row-reverse" *ngIf="authService.isLoggedIn$ ">
+                <img class="rounded-circle" style="width:48px;height:48px;" alt="avatar1"
+                    src="https://t4.ftcdn.net/jpg/00/84/67/19/360_F_84671939_jxymoYZO8Oeacc3JRBDE8bSXBWj0ZfA9.jpg"
+                    data-bs-toggle="dropdown" aria-expanded="false" />
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" href="javascript:void(0);" (click)="authService.logout()">Log Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
