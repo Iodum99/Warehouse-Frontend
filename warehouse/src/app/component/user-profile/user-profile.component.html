@@ -1,0 +1,11 @@
+<div class="main-container" *ngIf="isUserLoaded">
+    <h2 class="text-info">{{user?.username}}'s Profile</h2>
+    <h4> {{user?.name}} {{user?.surname}}</h4>
+    <br>
+    <img src="data:image/png;base64, {{user?.avatar}}" alt="profile_pic" style="max-width: 200px; max-height: 200px;" />
+    <hr>
+   <div *ngIf="canEdit">
+    <h4>CAN EDIT</h4>
+   </div>
+</div>
+

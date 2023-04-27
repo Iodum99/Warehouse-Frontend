@@ -10,7 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './component/login/login.component';
 import { HomepageComponent } from './component/homepage/homepage.component';
 import { HeaderComponent } from './component/header/header.component';
-import { ProfileComponent } from './component/profile/profile.component';
+import { UserComponent } from './component/user/user.component';
+import { UserProfileComponent } from './component/user-profile/user-profile.component';
+import { AssetsListComponent } from './component/assets-list/assets-list.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { ProfileComponent } from './component/profile/profile.component';
     LoginComponent,
     HomepageComponent,
     HeaderComponent,
-    ProfileComponent
+    UserComponent,
+    UserProfileComponent,
+    AssetsListComponent
   ],
   imports: [
     BrowserModule,

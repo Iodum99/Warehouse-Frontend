@@ -6,11 +6,11 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
 import { UserService } from 'src/app/service/user.service';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  selector: 'app-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class UserComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute, 
@@ -19,24 +19,14 @@ export class ProfileComponent implements OnInit {
  
     private routeSub: Subscription = new Subscription;
 
-  user?: User
-  canEdit: boolean = false;
+  id?: number
 
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe(params => {
       console.log(params) 
       console.log(params['id'])
-      this.userService.getUser(params['id']).subscribe({
-        next: (user: User) => 
-        {
-          this.user = user
-          console.log(this.user)
-          if(params['id'] == this.authService.loggedUser?.id)
-            this.canEdit = true;
-        },
-        error: () => {}
-      })
-
+      this.id = params['id']
+      
       
     });
   }
