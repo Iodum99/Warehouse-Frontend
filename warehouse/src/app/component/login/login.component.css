@@ -1,6 +1,7 @@
 .main-container{
     margin: 1rem auto;
-    max-width: 40rem;
-    padding: 0 1rem;
+    max-width: 25rem;
+    padding: 1rem 1rem 1rem 1rem;
     text-align: left;
+    background-color: rgb(31, 31, 31);
 }
