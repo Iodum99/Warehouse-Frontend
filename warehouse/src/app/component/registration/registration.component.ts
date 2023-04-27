@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RegistrationService } from 'src/app/service/registration.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as alertify from 'alertifyjs'
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-registration',
@@ -10,7 +10,7 @@ import * as alertify from 'alertifyjs'
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor(private registrationService: RegistrationService) { }
+  constructor(private userService: UserService) { }
 
   username?: string
   password?: string
@@ -42,7 +42,7 @@ export class RegistrationComponent implements OnInit {
 
       console.log(newUser)
 
-      this.registrationService.createUser(newUser).subscribe({
+      this.userService.createUser(newUser).subscribe({
         next: () => {
           this.registrationSuccess = true
         },

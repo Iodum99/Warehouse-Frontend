@@ -43,7 +43,7 @@ export class LoginComponent {
             
           },
           next: () => {
-            this.router.navigate(["/home"])
+            window.location.href="http://localhost:4200/home"
           }
         }
       )
