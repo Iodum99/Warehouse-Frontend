@@ -14,20 +14,28 @@ export class UserComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute, 
-    private userService: UserService,
-    private authService: AuthenticationService){}
+    private authService: AuthenticationService,
+    private userService: UserService){}
  
     private routeSub: Subscription = new Subscription;
 
   id?: number
+  username?: string
+  user?: User
+  isUserLoaded: boolean = false;
 
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe(params => {
-      console.log(params) 
-      console.log(params['id'])
       this.id = params['id']
-      
-      
+
+      this.userService.getUser(this.id).subscribe({
+        next: (user: User) => 
+        {
+          this.username = user.username
+          this.isUserLoaded = true;
+        },
+        error: () => {}
+      })
     });
   }
 

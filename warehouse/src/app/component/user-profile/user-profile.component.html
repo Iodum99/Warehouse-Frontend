@@ -1,5 +1,5 @@
 <div class="main-container">
-    <div *ngIf="isUserLoaded; else notLoaded">
+    <div>
         <div class="row">
             <div class="  align-items-left text-left">
                 <h4 class="text-info"> <strong> {{user?.username}}</strong></h4>
@@ -48,7 +48,4 @@
             </div>
         </div>
     </div>
-    <ng-template #notLoaded>
-        <h6 class="text-info"> <i class="bi bi-arrow-clockwise"></i> Loading...</h6>
-    </ng-template>
 </div>

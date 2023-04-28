@@ -16,7 +16,6 @@ export class UserProfileComponent implements OnInit {
   
   @Input() id?: number
   canEdit: boolean = false
-  isUserLoaded: boolean = false
   user?: User
   isAdmin:boolean = false
 
@@ -25,7 +24,6 @@ export class UserProfileComponent implements OnInit {
       next: (user: User) => 
       {
         this.user = user
-        this.isUserLoaded = true
         if(this.user.username === this.authService.loggedUser?.sub)
           this.canEdit = true;
           

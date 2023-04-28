@@ -13,6 +13,7 @@ import { HeaderComponent } from './component/header/header.component';
 import { UserComponent } from './component/user/user.component';
 import { UserProfileComponent } from './component/user-profile/user-profile.component';
 import { AssetsListComponent } from './component/assets-list/assets-list.component';
+import { AssetsComponent } from './component/assets/assets.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AssetsListComponent } from './component/assets-list/assets-list.compone
     HeaderComponent,
     UserComponent,
     UserProfileComponent,
-    AssetsListComponent
+    AssetsListComponent,
+    AssetsComponent
   ],
   imports: [
     BrowserModule,
