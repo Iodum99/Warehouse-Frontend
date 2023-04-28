@@ -7,5 +7,6 @@ export interface User{
     biography: string
     country: string
     avatar: BigInt64Array
+    dateOfBirth: Date
 
 }

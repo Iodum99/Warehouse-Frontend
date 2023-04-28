@@ -11,13 +11,14 @@ import { UserService } from 'src/app/service/user.service';
 export class UserProfileComponent implements OnInit {
 
   constructor(
-    private authenticationService: AuthenticationService,
+    private authService: AuthenticationService,
     private userService: UserService){}
   
   @Input() id?: number
   canEdit: boolean = false
   isUserLoaded: boolean = false
   user?: User
+  isAdmin:boolean = false
 
   ngOnInit(): void {
     this.userService.getUser(this.id).subscribe({
@@ -25,8 +26,9 @@ export class UserProfileComponent implements OnInit {
       {
         this.user = user
         this.isUserLoaded = true
-        if(this.user.username === this.authenticationService.loggedUser?.sub)
+        if(this.user.username === this.authService.loggedUser?.sub)
           this.canEdit = true;
+          
       },
       error: () => {}
     })   

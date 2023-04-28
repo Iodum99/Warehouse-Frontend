@@ -12,7 +12,7 @@
                 src="data:image/png;base64, {{user?.avatar}}" alt="profile_pic"
                     data-bs-toggle="dropdown" aria-expanded="false" />
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" routerLink="user/{{authService.loggedUser?.id}}">
+                    <li><a class="dropdown-item" href="http://localhost:4200/user/{{authService.loggedUser?.id}}">
                         <i class="bi bi-person-lines-fill" style="margin-right: 2px;"></i> My Profile
                     </a></li>
                     <li><a class="dropdown-item" href="javascript:void(0);" (click)="authService.logout()">

@@ -1,12 +1,51 @@
 <div class="main-container">
     <div *ngIf="isUserLoaded; else notLoaded">
-        <h2 class="text-info">{{user?.username}}'s Profile</h2>
-        <h4> {{user?.name}} {{user?.surname}}</h4>
-        <br>
-        <img src="data:image/png;base64, {{user?.avatar}}" alt="profile_pic" style="max-width: 200px; max-height: 200px;" />
-        <hr>
-        <div *ngIf="canEdit">
-            <h4>CAN EDIT</h4>
+        <div class="row">
+            <div class="  align-items-left text-left">
+                <h4 class="text-info"> <strong> {{user?.username}}</strong></h4>
+                <h5 *ngIf="isAdmin" style="margin-left: 5px;" class="text-muted font-size-sm">(Admin)</h5>
+                <p class="font-size-sm"> <strong> {{user?.name}} {{user?.surname}} </strong></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                <div class="card" style="background-color: rgb(32, 32, 32);">
+                    <div class="card-body">
+                        <div class=" flex-column align-items-left text-center">
+                            <img src="data:image/png;base64, {{user?.avatar}}" alt="Admin" class="rounded-circle"
+                                width="150">       
+                        </div>
+                        <div class=" flex-column align-items-left text-left" style="margin: 10px;">
+                            <p class="text-muted font-size-sm">Country: {{user?.country}} </p>
+                            <p class="text-muted font-size-sm">Birthday: {{user?.dateOfBirth}} </p>
+                        </div>
+                        <div class=" flex-column align-items-left text-center" *ngIf="canEdit">
+                            <hr>
+                            <ul class="navbar-nav me-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" routerLink="edit"><i class="bi bi-pencil-square"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-6">
+                <div class="card" style="background-color: rgb(32, 32, 32);">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-left text-left">
+                            <h4>About</h4>
+                            <hr>
+                            <p class="text-muted font-size-sm">{{user?.biography || "This person prefers to remainmysterious..."}}</p>
+                            <br>
+                            <h4>Interests</h4>
+                            <hr>
+                            <p class="text-muted font-size-sm">{{user?.interests || "No interests to show..."}} </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <ng-template #notLoaded>
