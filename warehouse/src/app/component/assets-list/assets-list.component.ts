@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AssetListView } from 'src/app/model/asset-list-view';
 import { AssetService } from 'src/app/service/asset.service';
+import { AuthenticationService } from 'src/app/service/authentication.service';
 
 @Component({
   selector: 'app-assets-list',
@@ -9,9 +10,12 @@ import { AssetService } from 'src/app/service/asset.service';
 })
 export class AssetsListComponent implements OnInit {
 
-  constructor(private assetService: AssetService){}
+  constructor(
+    private assetService: AssetService,
+    public authService: AuthenticationService){}
+
   assets: AssetListView[] = []
-  noAssetsFound: boolean = false
+  assetsExist: boolean  = true
 
   @Input() id?: number = 0
   
@@ -20,9 +24,10 @@ export class AssetsListComponent implements OnInit {
       next: (loadedAssets: AssetListView[]) => 
       {
         this.assets = loadedAssets;
-        if(this.assets.length == 0)
-          this.noAssetsFound = true
-          
+        
+        if(this.assets.length < 1){
+          this.assetsExist = false
+        }  
         console.log(this.assets)
       },
       error: () => {}

@@ -1,5 +1,5 @@
 <div class="main-container">
-    <div class="row no-gutters">
+    <div *ngIf="assetsExist else noAssets" class="row no-gutters">
         <div *ngFor="let asset of assets; index as i;" class="card mx-auto"
             style="background-color: rgb(32, 32, 32); max-width: 200px; margin: 15px;">
             <img class="card-img-top" src="data:image/png;base64, {{asset.image}}" alt="Card image cap"
@@ -8,8 +8,7 @@
                 <div>
                     <p style="font-size: 18px;">{{asset.name}}</p>
                     <p class="text-muted font-size-sm" style="font-size: 12px;">by: 
-                        <strong><a class="link-opacity-10 text-info" href="http://localhost:4200/user/{{asset.userId}}">{{asset.author}}</a></strong>
-                        
+                        <strong><a class="link-opacity-10 text-info" href="http://localhost:4200/user/{{asset.userId}}">{{asset.author}}</a></strong>              
                     <hr>
                 </div>
                 <div>
@@ -19,7 +18,15 @@
                     <small class="text-muted " style="font-size: 8px;"><i class="bi bi-calendar-week"></i>
                         {{asset.uploadDate}}</small>
                 </div>
+                <div *ngIf="asset.userId == authService.loggedUser?.id" class="row justify-content-end">
+                    <button class="btn btn-seoondary btn-sm text-muted" style="width: auto;"><i class="bi bi-pencil-fill"></i> Edit Item</button>
+                </div>
             </div>
         </div>
     </div>
+    <ng-template #noAssets>
+        <div class="row">
+            <h3 class="text-info">No assets available...</h3>
+        </div>
+    </ng-template>
 </div>
