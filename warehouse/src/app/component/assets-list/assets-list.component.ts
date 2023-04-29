@@ -11,17 +11,23 @@ export class AssetsListComponent implements OnInit {
 
   constructor(private assetService: AssetService){}
   assets: AssetListView[] = []
-  @Input() username?: string = ""
+  noAssetsFound: boolean = false
+
+  @Input() id?: number = 0
   
   ngOnInit(): void {
-    this.assetService.getAssets(this.username).subscribe({
+    this.assetService.getAssets(this.id).subscribe({
       next: (loadedAssets: AssetListView[]) => 
       {
         this.assets = loadedAssets;
+        if(this.assets.length == 0)
+          this.noAssetsFound = true
+          
         console.log(this.assets)
       },
       error: () => {}
     })   
   }
+  
 
 }

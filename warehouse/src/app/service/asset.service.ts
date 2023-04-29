@@ -11,7 +11,7 @@ export class AssetService {
   constructor(private http: HttpClient) { }
 
   public getAssets(author: any): Observable<any>{
-    if(author != "")
+    if(author != 0)
       return this.http.get(environment.baseUrlAssetService + "/user/" + author );
     else
       return this.http.get(environment.baseUrlAssetService);

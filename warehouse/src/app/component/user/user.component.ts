@@ -20,7 +20,6 @@ export class UserComponent implements OnInit {
     private routeSub: Subscription = new Subscription;
 
   id?: number
-  username?: string
   user?: User
   isUserLoaded: boolean = false;
 
@@ -29,9 +28,8 @@ export class UserComponent implements OnInit {
       this.id = params['id']
 
       this.userService.getUser(this.id).subscribe({
-        next: (user: User) => 
+        next: () => 
         {
-          this.username = user.username
           this.isUserLoaded = true;
         },
         error: () => {}
