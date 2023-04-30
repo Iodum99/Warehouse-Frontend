@@ -2,20 +2,22 @@
     <div *ngIf="assetsExist else noAssets" class="row no-gutters">
         <div *ngFor="let asset of assets; index as i;" class="card mx-auto"
             style="background-color: rgb(32, 32, 32); max-width: 220px; margin: 15px;">
-            <img class="card-img-top" src="assets/user_id_{{asset.userId}}/asset_id_{{asset.id}}/main.jpg" alt="Card image cap"
-                style="height: 120px;  object-fit:cover">
+            <a href="#" style="color: white; text-decoration: none;">
+                <img class="card-img-top" src="assets/user_id_{{asset.userId}}/asset_id_{{asset.id}}/main.jpg" alt="Card image cap"
+                style="height: 120px;  object-fit:cover; margin-top: 10px;">     
+                <p style="font-size: 18px;">{{asset.name}}</p> 
+            </a> 
             <div class="d-flex flex-column align-items-left text-left" style="margin-top: 5px">
                 <div>
-                    <p style="font-size: 18px;">{{asset.name}}</p>
                     <p class="text-muted font-size-sm" style="font-size: 12px;">by: 
-                        <strong><a class="link-opacity-10 text-info" href="http://localhost:4200/user/{{asset.userId}}">{{asset.author}}</a></strong>              
+                        <strong><a class="link-opacity-10 text-info" href="http://localhost:4200/user/{{asset.userId}}">{{asset.author}}</a></strong>   
                     <hr>
                 </div>
                 <div>
                     <p class="text-muted font-size-sm" style="font-size: 12px;">{{asset.description}}</p>
                 </div>
                 <div class="align-items-end">
-                    <small class="text-muted " style="font-size: 8px;"><i class="bi bi-calendar-week"></i>
+                    <small class="text-muted " style="font-size: 8px; text-decoration: none;"><i class="bi bi-calendar-week"></i>
                         {{asset.uploadDate}}</small>
                 </div>
                 <div *ngIf="asset.userId == authService.loggedUser?.id" class="row justify-content-end">

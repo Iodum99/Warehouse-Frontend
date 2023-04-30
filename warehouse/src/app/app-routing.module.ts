@@ -24,7 +24,7 @@ const routes: Routes = [
     component: UserComponent
   },
   {
-    path: "assets/:type",
+    path: ":type",
     component: AssetsComponent
   }
 ];

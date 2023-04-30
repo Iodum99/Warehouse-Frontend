@@ -14,6 +14,7 @@ import { UserComponent } from './component/user/user.component';
 import { UserProfileComponent } from './component/user-profile/user-profile.component';
 import { AssetsListComponent } from './component/assets-list/assets-list.component';
 import { AssetsComponent } from './component/assets/assets.component';
+import { AssetDetailsComponent } from './component/asset-details/asset-details.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AssetsComponent } from './component/assets/assets.component';
     UserComponent,
     UserProfileComponent,
     AssetsListComponent,
-    AssetsComponent
+    AssetsComponent,
+    AssetDetailsComponent
   ],
   imports: [
     BrowserModule,
