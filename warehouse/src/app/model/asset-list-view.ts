@@ -6,7 +6,9 @@ export interface AssetListView{
     author: string
     name: string
     description: string
-    image: BigInt64Array
+    filePath: string
+    imagePaths: string[]
     assetType: AssetType
     uploadDate: Date
+    lastModifiedDate: Date
 }
