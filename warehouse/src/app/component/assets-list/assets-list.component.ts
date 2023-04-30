@@ -16,18 +16,25 @@ export class AssetsListComponent implements OnInit {
 
   assets: AssetListView[] = []
   assetsExist: boolean  = true
+  public numberOfItems: number = 0
+  loaded: boolean = false
 
   @Input() id?: number = 0
+  @Input() assetType?: string = ""
   
   ngOnInit(): void {
-    this.assetService.getAssets(this.id).subscribe({
+    console.log("Sending request to fetch assets...")
+    this.assetService.getAssets(this.id, this.assetType).subscribe({
       next: (loadedAssets: AssetListView[]) => 
       {
+        console.log("Got Assets!")
         this.assets = loadedAssets;
         
         if(this.assets.length < 1){
           this.assetsExist = false
         }  
+        this.numberOfItems = this.assets.length
+        this.loaded = true
         console.log(this.assets)
       },
       error: () => {}

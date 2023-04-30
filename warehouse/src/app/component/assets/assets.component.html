@@ -1,11 +1,12 @@
 <div class="main-container">
-    <div style="background-color: rgb(32, 32, 32); margin-bottom: 10px; padding: 10px ;height: 5rem;">
-        <div class="d-flex align-items-left text-center">
+    <div *ngIf="assets.loaded" style="background-color: rgb(32, 32, 32); margin-bottom: 10px; padding: 10px ;height: 5rem;">
+        <div class="row align-items-left text-left">
             <h4>Statistics</h4>
+            <p>Total items: {{assets.numberOfItems}}</p>
         </div>
     </div>
     <hr>
     <div style="background-color: rgb(32, 32, 32);">
-        <app-assets-list></app-assets-list>
+        <app-assets-list #assets [assetType]="assetType"></app-assets-list>
     </div>
 </div>

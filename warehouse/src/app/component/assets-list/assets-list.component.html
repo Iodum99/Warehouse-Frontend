@@ -1,7 +1,7 @@
 <div class="main-container">
     <div *ngIf="assetsExist else noAssets" class="row no-gutters">
         <div *ngFor="let asset of assets; index as i;" class="card mx-auto"
-            style="background-color: rgb(32, 32, 32); max-width: 200px; margin: 15px;">
+            style="background-color: rgb(32, 32, 32); max-width: 220px; margin: 15px;">
             <img class="card-img-top" src="data:image/png;base64, {{asset.image}}" alt="Card image cap"
                 style="height: 120px;  object-fit:cover">
             <div class="d-flex flex-column align-items-left text-left" style="margin-top: 5px">

@@ -10,10 +10,10 @@ export class AssetService {
 
   constructor(private http: HttpClient) { }
 
-  public getAssets(author: any): Observable<any>{
-    if(author != 0)
-      return this.http.get(environment.baseUrlAssetService + "/user/" + author );
+  public getAssets(authorId: any, type: any): Observable<any>{
+    if(authorId != 0)
+      return this.http.get(environment.baseUrlAssetService + "/user/" + authorId );
     else
-      return this.http.get(environment.baseUrlAssetService);
+      return this.http.get(environment.baseUrlAssetService + "/" + type);
   }
 }
