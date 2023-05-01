@@ -14,6 +14,11 @@ export class AssetService {
     if(authorId != 0)
       return this.http.get(environment.baseUrlAssetService + "/user/" + authorId );
     else
-      return this.http.get(environment.baseUrlAssetService + "/" + type);
+      return this.http.get(environment.baseUrlAssetService + "/type/" + type);
   }
+
+  public getAssetById(id: number): Observable<any>{
+    return this.http.get(environment.baseUrlAssetService + "/" + id);  
+  }
+
 }

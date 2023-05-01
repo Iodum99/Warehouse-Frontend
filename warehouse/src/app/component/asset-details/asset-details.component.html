@@ -1,1 +1,63 @@
-<p>asset-details works!</p>
+<div class="main-container">
+    <div *ngIf="loaded else notLoaded" class="row d-flex">
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <div class="card" style="background-color: rgb(32, 32, 32);">
+                    <div class="card-body">
+                        <div class=" flex-column align-items-left text-center">
+                            <div id="assetImages" class="carousel slide">
+                                <div class="carousel-inner">
+                                  <div class="carousel-item active">
+                                    <img class="d-block w-100" src="assets/user_id_{{asset.userId}}/asset_id_{{asset.id}}/main.jpg" alt="main_pic">   
+                                  </div>
+                                  <div *ngIf="asset.imagePaths.length > 1">
+                                    <div  *ngFor="let image of asset.imagePaths.slice(1); index as i;" class="carousel-item">
+                                        <img class="d-block w-100" src="assets/user_id_{{asset.userId}}/asset_id_{{asset.id}}/gallery{{i+1}}.jpg" alt="gallery_pic">
+                                      </div>
+                                  </div>   
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#assetImages" data-bs-slide="prev">
+                                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                  <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#assetImages" data-bs-slide="next">
+                                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                  <span class="visually-hidden">Next</span>
+                                </button>
+                              </div>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-6">
+                <div class="card" style="background-color: rgb(32, 32, 32);">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-left text-left">
+                            <h4>{{asset.name}}</h4> <p> by <strong><a class="link-opacity-10 text-info" href="http://localhost:4200/user/{{asset.userId}}">{{asset.author}}</a></strong>  </p>
+                            <a class="btn btn-primary btn-md" style="width: auto;" href=".{{asset.filePath}}" target="_blank" download="{{file}}" ><i class="bi bi-download"></i> Download</a>
+                            <hr>
+                            <p class="text-muted font-size-sm">{{asset.description}}</p>
+                        </div>
+                        <div class="row d-flex">
+                            <div class="align-items-end">
+                                <small class="text-muted " style="font-size: 8px; text-decoration: none;"><i class="bi bi-calendar-week"></i>
+                                    {{asset.uploadDate}}</small>  
+                                <small *ngIf="edited" class="text-secondary " style="margin-left: 5px; font-size: 8px; text-decoration: none;">
+                                    <strong>(Last Modified: {{asset.uploadDate}})</strong></small>
+                            </div>
+                        </div>
+                        <div *ngIf="asset.userId == authService.loggedUser?.id" class="row justify-content-end">
+                            <button class="btn btn-seoondary btn-sm text-muted" style="width: auto;"><i class="bi bi-pencil-fill"></i> Edit Item</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-template #notLoaded>
+        <div class="row">
+            <h6 class="text-info"> <i class="bi bi-arrow-clockwise"></i> Loading...</h6>
+        </div>
+    </ng-template>
+    
+</div>

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AssetListView } from 'src/app/model/asset-list-view';
+import { Asset } from 'src/app/model/asset';
 import { AssetService } from 'src/app/service/asset.service';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 
@@ -14,7 +14,7 @@ export class AssetsListComponent implements OnInit {
     private assetService: AssetService,
     public authService: AuthenticationService){}
 
-  assets: AssetListView[] = []
+  assets: Asset[] = []
   assetsExist: boolean  = true
   public numberOfItems: number = 0
   loaded: boolean = false
@@ -25,7 +25,7 @@ export class AssetsListComponent implements OnInit {
   ngOnInit(): void {
     console.log("Sending request to fetch assets...")
     this.assetService.getAssets(this.id, this.assetType).subscribe({
-      next: (loadedAssets: AssetListView[]) => 
+      next: (loadedAssets: Asset[]) => 
       {
         console.log("Got Assets!")
         this.assets = loadedAssets;
