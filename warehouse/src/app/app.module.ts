@@ -15,6 +15,7 @@ import { UserProfileComponent } from './component/user-profile/user-profile.comp
 import { AssetsListComponent } from './component/assets-list/assets-list.component';
 import { AssetsComponent } from './component/assets/assets.component';
 import { AssetDetailsComponent } from './component/asset-details/asset-details.component';
+import { FavoriteAssetsComponent } from './component/favorite-assets/favorite-assets.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AssetDetailsComponent } from './component/asset-details/asset-details.c
     UserProfileComponent,
     AssetsListComponent,
     AssetsComponent,
-    AssetDetailsComponent
+    AssetDetailsComponent,
+    FavoriteAssetsComponent
   ],
   imports: [
     BrowserModule,

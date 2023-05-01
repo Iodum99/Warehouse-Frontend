@@ -64,7 +64,14 @@ export class AssetDetailsComponent implements OnInit {
     link.click();
     link.remove();
 
-    this.assetService.increaseDownloadsCount(this.asset.id).subscribe()
+    this.assetService.increaseDownloadsCount(this.asset.id).subscribe({
+      next:() => 
+      {
+        this.ngOnInit() 
+      },
+      error:() => {}
+    }
+    )
   }
 
   like(){

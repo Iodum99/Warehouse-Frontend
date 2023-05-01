@@ -1,6 +1,6 @@
 <div class="main-container">
     <div *ngIf="loaded else notLoaded" class="row d-flex">
-        <div class="row justify-content-center">
+        <div class="row justify-content-evenly">
             <div class="col-6">
                 <div class="card" style="background-color: rgb(32, 32, 32);">
                     <div class="card-body">
@@ -76,7 +76,7 @@
                             </div>
                         </div>
                         <div *ngIf="asset.userId == authService.loggedUser?.id" class="row justify-content-end">
-                            <button class="btn btn-seoondary btn-sm text-muted" style="width: auto;"><i
+                            <button class="btn btn-secondary btn-sm text-muted" style="width: auto;"><i
                                     class="bi bi-pencil-fill"></i> Edit Item</button>
                         </div>
                     </div>

@@ -1,0 +1,9 @@
+.main-container{
+    max-width: 60rem;
+    text-align: left;
+}
+
+.remove-like:hover{
+    color: red;
+    transform: scale(1)
+}

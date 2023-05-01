@@ -29,4 +29,8 @@ export class AssetService {
     return this.http.put(environment.baseUrlAssetService + "/likes/" + assetId + "_" + userId, null);  
   }
 
+  public getFavoriteAssets(id: any): Observable<any>{
+    return this.http.get(environment.baseUrlAssetService + "/favorites/" + id);  
+  }
+
 }
