@@ -9,3 +9,23 @@
     white-space: nowrap;
   }
 
+.like{
+    transition: transform 0.2s ease;
+    color: red;
+}
+
+.like:hover{
+    color: red;
+    transform: scale(1)
+}
+
+.no-like{
+    transition: transform 0.2s ease;
+}
+
+.no-like:hover{
+    color: white;
+    transform: scale(1)
+}
+
+

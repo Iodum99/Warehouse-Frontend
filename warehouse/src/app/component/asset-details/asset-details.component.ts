@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Asset } from 'src/app/model/asset';
 import { AssetService } from 'src/app/service/asset.service';
 import { AuthenticationService } from 'src/app/service/authentication.service';
+import * as alertify from 'alertifyjs'
 
 @Component({
   selector: 'app-asset-details',
@@ -23,6 +24,7 @@ export class AssetDetailsComponent implements OnInit {
     edited: boolean = false
     path: string[] = []
     file: string = ""
+    liked: boolean = false
 
     
   ngOnInit(): void {
@@ -37,9 +39,15 @@ export class AssetDetailsComponent implements OnInit {
           this.asset.filePath = path[1]
           this.file = this.asset.filePath.replace(/^.*[\\\/]/, '')
       
-          if(this.asset.lastModifiedDate != null)
-          
-          this.edited = true
+          if(this.asset.lastModifiedDate != null){
+            this.edited = true
+          }
+              
+          if(this.asset.userIdLikes.length > 0){
+            if(this.asset.userIdLikes.includes(this.authService.loggedUser?.id))
+              this.liked = true
+          }
+                  
           this.loaded = true
         },
         error: () => {}
@@ -57,6 +65,23 @@ export class AssetDetailsComponent implements OnInit {
     link.remove();
 
     this.assetService.increaseDownloadsCount(this.asset.id).subscribe()
-}
+  }
+
+  like(){
+    this.assetService.manageLikes(this.asset.id, this.authService.loggedUser?.id).subscribe({
+      next:() => 
+      {
+        if(!this.asset.userIdLikes.includes(this.authService.loggedUser?.id)){
+          alertify.notify("Added this asset to favorites!", "", 5)
+          this.liked = true
+        } else {
+          alertify.notify("Removed this asset from your favorites... :(", "", 5)
+          this.liked = false
+        }
+        this.ngOnInit() 
+      },
+      error:() => {}
+    })
+  }
 
 }

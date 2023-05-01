@@ -25,4 +25,8 @@ export class AssetService {
     return this.http.put(environment.baseUrlAssetService + "/downloads/" + id, null);  
   }
 
+  public manageLikes(assetId: number, userId: number): Observable<any>{
+    return this.http.put(environment.baseUrlAssetService + "/likes/" + assetId + "_" + userId, null);  
+  }
+
 }

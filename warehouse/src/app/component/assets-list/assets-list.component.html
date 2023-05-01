@@ -16,9 +16,13 @@
                 <div>
                     <p class="text-muted font-size-sm" style="font-size: 12px;">{{asset.description}}</p>
                 </div>
-                <div class="align-items-end">
-                    <small class="text-muted " style="font-size: 8px; text-decoration: none;"><i class="bi bi-calendar-week"></i>
-                        {{asset.uploadDate}}</small>
+                <div class="d-flex" style="margin-top: 10px;">
+                    <p class="text-muted text-sm me-2" style="font-size: 12px">
+                        <i class="bi bi-file-earmark-arrow-down-fill"></i> {{asset.downloads}}</p>
+                    <p class="text-muted text-sm" style="font-size: 12px">
+                        <i class="bi bi-heart-fill"></i> {{asset.userIdLikes.length}}</p>
+                    <small class="text-muted ms-auto " style="font-size: 12px">
+                        <i class="bi bi-calendar-week"></i> {{asset.uploadDate}}</small>
                 </div>
                 <div *ngIf="asset.userId == authService.loggedUser?.id" class="row justify-content-end">
                     <button class="btn btn-seoondary btn-sm text-muted" style="width: auto;"><i class="bi bi-pencil-fill"></i> Edit Item</button>

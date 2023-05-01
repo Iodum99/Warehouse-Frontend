@@ -12,6 +12,7 @@ export class Asset{
     uploadDate: Date
     lastModifiedDate: Date
     downloads: number
+    userIdLikes: number[]
 
     constructor(){
         this.id = 0
@@ -25,5 +26,6 @@ export class Asset{
         this.uploadDate = new Date()
         this.lastModifiedDate = new Date()
         this.downloads = 0
+        this.userIdLikes = []
     }
 }

@@ -40,18 +40,28 @@
                 <div class="card" style="background-color: rgb(32, 32, 32);">
                     <div class="card-body">
                         <div class="d-flex flex-column text-left">
-                            <div class="d-flex">
+                            <div *ngIf="authService.isLoggedIn$ | async" class="d-flex">
                                 <h4>{{asset.name}}</h4> 
+                                <i *ngIf="liked && authService.loggedUser?.id != asset.userId else notLiked" class="bi bi-heart-fill like ms-auto" (click)="like()" onmouseover="this.className = 'bi bi-heart no-like ms-auto'" onmouseout="this.className = 'bi bi-heart-fill ms-auto like'"></i>
+                                <ng-template #notLiked>
+                                    <i *ngIf="!liked && authService.loggedUser?.id != asset.userId" class="bi bi-heart no-like ms-auto" (click)="like()" onmouseover="this.className = 'bi bi-heart-fill like ms-auto'" onmouseout="this.className = 'bi bi-heart no-like ms-auto'"></i>
+                                </ng-template>
                             </div>
                             <p> by <strong><a class="link-opacity-10 text-info"
                                         href="http://localhost:4200/user/{{asset.userId}}">{{asset.author}}</a></strong>
                             </p>
                             <button class="btn btn-info btn-md" style="width: auto;" (click)="download()"><i
                                     class="bi bi-download"></i> Download</button>
-                            <p *ngIf="asset.downloads == 1" style="margin-top: 10px;" class="text-muted text-sm"><i
-                                    class="bi bi-file-earmark-arrow-down-fill"></i> {{asset.downloads}} dl</p>
-                            <p *ngIf="asset.downloads != 1" style="margin-top: 10px;" class="text-muted text-sm"><i
-                                    class="bi bi-file-earmark-arrow-down-fill"></i> {{asset.downloads}} dls</p>
+                            <div class="d-flex" style="margin-top: 10px;">
+                                <p *ngIf="asset.downloads == 1"class="text-muted text-sm me-2"><i
+                                        class="bi bi-file-earmark-arrow-down-fill"></i> {{asset.downloads}} dl</p>
+                                <p *ngIf="asset.downloads != 1" class="text-muted text-sm me-2"><i
+                                        class="bi bi-file-earmark-arrow-down-fill"></i> {{asset.downloads}} dls</p>
+                                <p *ngIf="asset.userIdLikes.length == 1" class="text-muted text-sm"><i
+                                        class="bi bi-heart-fill"></i> {{asset.userIdLikes.length}} like</p>
+                                <p *ngIf="asset.userIdLikes.length != 1" class="text-muted text-sm"><i
+                                        class="bi bi-heart-fill"></i> {{asset.userIdLikes.length}} likes</p>
+                            </div>
                             <hr>
                             <p class="text-muted font-size-sm">{{asset.description}}</p>
                         </div>
