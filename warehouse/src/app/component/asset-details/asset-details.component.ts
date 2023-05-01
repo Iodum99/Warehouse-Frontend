@@ -47,4 +47,16 @@ export class AssetDetailsComponent implements OnInit {
     })
   }
 
+  download(){
+    const link = document.createElement('a');
+    link.setAttribute('target', '_blank');
+    link.setAttribute('href', '.' + this.asset.filePath);
+    link.setAttribute('download', this.file);
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    this.assetService.increaseDownloadsCount(this.asset.id).subscribe()
+}
+
 }

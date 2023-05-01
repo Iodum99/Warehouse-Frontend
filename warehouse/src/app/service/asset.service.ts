@@ -21,4 +21,8 @@ export class AssetService {
     return this.http.get(environment.baseUrlAssetService + "/" + id);  
   }
 
+  public increaseDownloadsCount(id: number): Observable<any>{
+    return this.http.put(environment.baseUrlAssetService + "/downloads/" + id, null);  
+  }
+
 }
