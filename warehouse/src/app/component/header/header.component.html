@@ -8,8 +8,11 @@
         </div>
         <div *ngIf="loaded" class="col-6">
             <div class="dropdown d-flex flex-row-reverse" *ngIf="authService.isLoggedIn$ | async ">
-                <img class="rounded-circle" style="width:48px;height:48px;" alt="avatar1"
+                <img *ngIf="user?.avatar != null" class="rounded-circle" style="width:48px;height:48px;" alt="avatar1"
                 src="data:image/png;base64, {{user?.avatar}}" alt="profile_pic"
+                    data-bs-toggle="dropdown" aria-expanded="false" />
+                <img *ngIf="user?.avatar == null" class="rounded-circle" style="width:48px;height:48px;" alt="avatar1"
+                src="assets/default_avatar.png" alt="profile_pic"
                     data-bs-toggle="dropdown" aria-expanded="false" />
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li><a class="dropdown-item" href="http://localhost:4200/user/{{authService.loggedUser?.id}}">

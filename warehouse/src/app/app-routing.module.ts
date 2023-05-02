@@ -6,6 +6,7 @@ import { HomepageComponent } from './component/homepage/homepage.component';
 import { UserComponent } from './component/user/user.component';
 import { AssetsComponent } from './component/assets/assets.component';
 import { AssetDetailsComponent } from './component/asset-details/asset-details.component';
+import { VerificationComponent } from './component/verification/verification.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: "asset/:id",
     component: AssetDetailsComponent
+  },
+  {
+    path: "verification/token/:id",
+    component: VerificationComponent
   }
 ];
 

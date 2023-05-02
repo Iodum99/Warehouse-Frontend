@@ -16,6 +16,7 @@ import { AssetsListComponent } from './component/assets-list/assets-list.compone
 import { AssetsComponent } from './component/assets/assets.component';
 import { AssetDetailsComponent } from './component/asset-details/asset-details.component';
 import { FavoriteAssetsComponent } from './component/favorite-assets/favorite-assets.component';
+import { VerificationComponent } from './component/verification/verification.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { FavoriteAssetsComponent } from './component/favorite-assets/favorite-as
     AssetsListComponent,
     AssetsComponent,
     AssetDetailsComponent,
-    FavoriteAssetsComponent
+    FavoriteAssetsComponent,
+    VerificationComponent
   ],
   imports: [
     BrowserModule,

@@ -23,6 +23,7 @@ export class UserProfileComponent implements OnInit {
     this.userService.getUser(this.id).subscribe({
       next: (user: User) => 
       {
+        console.log(user)
         this.user = user
         if(this.user.username === this.authService.loggedUser?.sub)
           this.canEdit = true;
