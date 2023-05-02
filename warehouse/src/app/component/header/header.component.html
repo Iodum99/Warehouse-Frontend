@@ -9,7 +9,7 @@
         <div *ngIf="loaded" class="col-6">
             <div class="dropdown d-flex flex-row-reverse" *ngIf="authService.isLoggedIn$ | async ">
                 <img *ngIf="user?.avatar != null" class="rounded-circle" style="width:48px;height:48px;" alt="avatar1"
-                src="data:image/png;base64, {{user?.avatar}}" alt="profile_pic"
+                src="assets\user_id_{{authService.loggedUser?.id}}\avatar.jpg" alt="profile_pic"
                     data-bs-toggle="dropdown" aria-expanded="false" />
                 <img *ngIf="user?.avatar == null" class="rounded-circle" style="width:48px;height:48px;" alt="avatar1"
                 src="assets/default_avatar.png" alt="profile_pic"
