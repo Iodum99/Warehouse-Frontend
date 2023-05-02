@@ -6,20 +6,23 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav me-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="http://localhost:4200/object">Objects</a>
+              <li class="nav-item" style="margin-right: 10px;">
+                <a class="nav-link" routerLink=""><i class="bi bi-house-fill"></i></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="http://localhost:4200/texture">Textures</a>
+                <a class="nav-link" routerLink="/object">Objects</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="http://localhost:4200/audio">Audio</a>
+                <a class="nav-link" routerLink="/texture">Textures</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="http://localhost:4200/vfx">VFX</a>
+                <a class="nav-link" routerLink="/audio">Audio</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="http://localhost:4200/gui">GUI</a>
+                <a class="nav-link" routerLink="/vfx">VFX</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/gui">GUI</a>
               </li>
             </ul>
             <div *ngIf="authService.isLoggedIn$ | async; else notlogged">
