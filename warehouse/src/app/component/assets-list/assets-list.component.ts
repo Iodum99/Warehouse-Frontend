@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Asset } from 'src/app/model/asset';
 import { AssetService } from 'src/app/service/asset.service';
 import { AuthenticationService } from 'src/app/service/authentication.service';
@@ -8,21 +8,21 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
   templateUrl: './assets-list.component.html',
   styleUrls: ['./assets-list.component.css']
 })
-export class AssetsListComponent implements OnInit {
+export class AssetsListComponent implements OnChanges {
 
   constructor(
     private assetService: AssetService,
     public authService: AuthenticationService){}
 
   assets: Asset[] = []
-  assetsExist: boolean  = true
+  assetsExist?: boolean
   public numberOfItems: number = 0
   loaded: boolean = false
 
   @Input() id?: number = 0
   @Input() assetType?: string = ""
   
-  ngOnInit(): void {
+  ngOnChanges(): void {
     console.log("Sending request to fetch assets...")
     this.assetService.getAssets(this.id, this.assetType).subscribe({
       next: (loadedAssets: Asset[]) => 
@@ -32,14 +32,17 @@ export class AssetsListComponent implements OnInit {
         
         if(this.assets.length < 1){
           this.assetsExist = false
-        }  
+        } else {
+          this.assetsExist = true
+        } 
         this.numberOfItems = this.assets.length
         this.loaded = true
+        
         console.log(this.assets)
+
       },
       error: () => {}
     })   
   }
   
-
 }

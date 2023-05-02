@@ -14,7 +14,7 @@
           type="button" role="tab" aria-controls="pills-assets" aria-selected="false">Favorites</button>
       </li>
     </ul>
-    <!--TODO: Load components only on click-->
+    <hr>
     <div class="tab-content" id="pills-tabContent">
       <div class="tab-pane fade show active" id="user-profile" role="tabpanel" aria-labelledby="pills-user-profile-tab">
 
@@ -22,8 +22,25 @@
 
       </div>
       <div class="tab-pane fade" id="user-assets" role="tabpanel" aria-labelledby="pills-user-assets-tab">
-
-        <app-assets-list [id]="id"></app-assets-list>
+        <div class="d-flex flex-row">
+          <div class="dropdown p-2">
+            <button class="btn btn-secondary dropdown-toggle" style="font-size: 12px" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Asset Type
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="javascript:void(0);" (click)="setType('OBJECT')">3D Objects</a></li>
+              <li><a class="dropdown-item" href="javascript:void(0);" (click)="setType('TEXTURE')">Texture</a></li>
+              <li><a class="dropdown-item" href="javascript:void(0);" (click)="setType('AUDIO')">Audio</a></li>
+              <li><a class="dropdown-item" href="javascript:void(0);" (click)="setType('VFX')">VFX</a></li>
+              <li><a class="dropdown-item" href="javascript:void(0);" (click)="setType('GUI')">GUI</a></li>
+            </ul>
+          </div>
+          <div class="p-2">
+           
+          </div>
+        </div>
+       
+        <app-assets-list *ngIf="loadAssets" [id]="id" [assetType]="assetType"></app-assets-list>
 
       </div>
       <div class="tab-pane fade" id="user-favorite-assets" role="tabpanel" aria-labelledby="pills-user-favorite-assets-tab">
