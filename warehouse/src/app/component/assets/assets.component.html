@@ -6,7 +6,12 @@
         </div>
     </div>
     <hr>
-    <div style="background-color: rgb(32, 32, 32);">
-        <app-assets-list #assets [assetType]="assetType"></app-assets-list>
+    <div class="row ms-auto">
+        <div class="col-3 flex-column" style="background-color: rgb(32, 32, 32); margin-right: 4.1rem;" >
+            <h6 class="text-warning">TODO: Sorting, Filtering</h6>
+        </div>
+        <div class="col-8 flex-column" style="background-color: rgb(32, 32, 32);">
+            <app-assets-list #assets [assetType]="assetType"></app-assets-list>
+        </div>
     </div>
 </div>

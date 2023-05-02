@@ -1,7 +1,7 @@
-<div class="main-container">
+<div>
     <div *ngIf="assetsExist else noAssets" class="row no-gutters">
         <div *ngFor="let asset of assets; index as i;" class="card mx-auto"
-            style="background-color: rgb(32, 32, 32); max-width: 220px; margin: 15px;">
+            style="background-color: rgb(32, 32, 32); max-width: 190px; margin: 15px;">
             <a routerLink="/asset/{{asset.id}}" style="color: white; text-decoration: none;">
                 <img class="card-img-top" src="assets/user_id_{{asset.userId}}/asset_id_{{asset.id}}/main.jpg" alt="Card image cap"
                 style="height: 120px;  object-fit:cover; margin-top: 10px;">     
