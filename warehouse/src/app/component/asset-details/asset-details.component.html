@@ -71,16 +71,16 @@
                             </div>
                             <div class="row d-flex">
                                 <div class="align-items-end">
-                                    <small class="text-muted " style="font-size: 8px; text-decoration: none;"><i
+                                    <small class="text-muted text-sm" style="text-decoration: none;"><i
                                             class="bi bi-calendar-week"></i>
                                         {{asset.uploadDate}}</small>
-                                    <small *ngIf="edited" class="text-secondary "
-                                        style="margin-left: 5px; font-size: 8px; text-decoration: none;">
+                                    <small *ngIf="edited" class="text-secondary text-sm"
+                                        style="margin-left: 5px; text-decoration: none;">
                                         <strong>(Last Modified: {{asset.uploadDate}})</strong></small>
                                 </div>
                             </div>
                             <div *ngIf="asset.userId == authService.loggedUser?.id" class="row justify-content-end">
-                                <button class="btn btn-secondary btn-sm text-muted" style="width: auto;"><i
+                                <button routerLink="/asset/{{asset.id}}/edit" class="btn btn-secondary btn-sm text-muted" style="width: auto;"><i
                                         class="bi bi-pencil-fill"></i> Edit Item</button>
                             </div>
                         </div>

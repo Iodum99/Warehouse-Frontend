@@ -1,51 +1,69 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/model/user';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Asset } from 'src/app/model/asset';
 import { AssetService } from 'src/app/service/asset.service';
 import { AuthenticationService } from 'src/app/service/authentication.service';
-import * as alertify from 'alertifyjs'
-import { Router } from '@angular/router';
 import { AssetType } from 'src/app/model/asset-type';
-import { Asset } from 'src/app/model/asset';
+import * as alertify from 'alertifyjs'
 
 @Component({
-  selector: 'app-add-asset',
-  templateUrl: './add-asset.component.html',
-  styleUrls: ['./add-asset.component.css']
+  selector: 'app-edit-asset',
+  templateUrl: './edit-asset.component.html',
+  styleUrls: ['./edit-asset.component.css']
 })
-export class AddAssetComponent{
+export class EditAssetComponent implements OnInit {
 
   constructor(
-    private authService: AuthenticationService,
     private assetService: AssetService,
-    private router: Router) { }
+    public authService: AuthenticationService,
+    private route: ActivatedRoute,
+    private router: Router){}
+
+    routeSub: Subscription = new Subscription;
+    asset: Asset = new Asset()
+
+    assetName: string = ""
+    assetDescription: string = ""
+    assetType: string = ""
+    tags: string[] = []
+    newTag: string = ""
+    nameError: string = ""
+    assetTypeError: string = ""
+
+    file: any
+    image: any
+    gallery: File[] = []
   
-  id?: number
-  user?: User
-  assetName: string = ""
-  assetDescription: string = ""
-  assetType: string = ""
-  tags: string[] = []
-  newTag: string = ""
-  nameError: string = ""
-  fileError: string = ""
-  imageError: string = ""
-  assetTypeError: string = ""
-  error: boolean = false
+    imageSrc: string = ""
+    gallerySrc: string[] = []
+    counter: number = 0
+  
+    types = AssetType;
+  
+    ngOnInit(): void {
+      this.routeSub = this.route.params.subscribe(params => {
+        this.assetService.getAssetById(params['id']).subscribe({
+          next: (loadedAsset: Asset) => 
+          {
+            this.asset = loadedAsset;
+            console.log(this.asset)
 
-  file: any
-  image: any
-  gallery: File[] = []
-
-  imageSrc: string = ""
-  gallerySrc: string[] = []
-  counter: number = 0
-
-  types = AssetType;
+            this.assetName = this.asset.name
+            this.assetDescription = this.asset.description
+            this.assetType = this.assetType
+            this.tags = this.asset.tags
+            this.file = this.asset.filePath
+          },
+          error: () => {}
+        })
+      })   
+  }
 
   onFileInput(files: FileList | null): void {
     if (files) {
       this.file = files.item(0)
-      this.fileError = ""
+      console.log(this.file)
     }
   }
 
@@ -56,7 +74,6 @@ export class AddAssetComponent{
       if(this.image != null)
       this.imageSrc = URL.createObjectURL(this.image)
       
-      this.imageError = ""
     }
   }
 
@@ -83,13 +100,22 @@ export class AddAssetComponent{
 
     this.validate()
   
-    if(this.assetName != "" && this.assetType != "" && this.image != null && this.file != null) {
+    if(this.assetName != "" && this.assetType != "") {
       var asset = {
+        
+        id: this.asset.id,
         userId: this.authService.loggedUser?.id,
+        author: this.asset.author,
         name: this.assetName,
         description: this.assetDescription,
         assetType: this.assetType.toUpperCase(),
-        tags: this.tags
+        tags: this.tags,
+        uploadDate: this.asset.uploadDate,
+        filePath: this.asset.filePath,
+        imagePaths: this.asset.imagePaths,
+        userIdLikes: this.asset.userIdLikes,
+        downloads: this.asset.downloads,
+        lastModifiedDate: this.asset.lastModifiedDate
       }
       console.log(asset)
 
@@ -104,11 +130,11 @@ export class AddAssetComponent{
         } 
       }
 
-      this.assetService.uploadAsset(formData).subscribe({
-        next:(asset: Asset) => 
+      this.assetService.updateAsset(formData).subscribe({
+        next:() => 
         { 
-          alertify.notify("File Successfully Uploaded!", "", 5)
-          this.router.navigate(['/asset/' + asset.id])
+          alertify.notify("File Successfully Updated!", "", 5)
+          this.router.navigate(['/asset/' + this.asset.id])
         },
         error:() => {}
       })
@@ -124,14 +150,6 @@ export class AddAssetComponent{
     if (this.assetType == ""){
       this.assetTypeError = "Please select a type"
     }
-    if (this.image == null){
-      this.imageError = "Please select a main image for this asset..."
-    }
-    
-    if(this.file == null){
-      this.fileError = "Please select a zipped archive to upload..."
-    }
-  
   }
 
   addTag(newTag: string){
@@ -162,5 +180,4 @@ export class AddAssetComponent{
     if(this.assetType != "")
       this.assetTypeError = ""
   }
-
 }

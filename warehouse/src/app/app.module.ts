@@ -18,6 +18,7 @@ import { AssetDetailsComponent } from './component/asset-details/asset-details.c
 import { FavoriteAssetsComponent } from './component/favorite-assets/favorite-assets.component';
 import { VerificationComponent } from './component/verification/verification.component';
 import { AddAssetComponent } from './component/add-asset/add-asset.component';
+import { EditAssetComponent } from './component/edit-asset/edit-asset.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AddAssetComponent } from './component/add-asset/add-asset.component';
     AssetDetailsComponent,
     FavoriteAssetsComponent,
     VerificationComponent,
-    AddAssetComponent
+    AddAssetComponent,
+    EditAssetComponent
   ],
   imports: [
     BrowserModule,

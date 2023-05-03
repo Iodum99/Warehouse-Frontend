@@ -37,4 +37,8 @@ export class AssetService {
     return this.http.post(environment.baseUrlAssetService, data)
   }
 
+  public updateAsset(data: FormData): Observable<any>{
+    return this.http.put(environment.baseUrlAssetService, data)
+  }
+
 }
