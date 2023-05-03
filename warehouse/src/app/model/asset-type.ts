@@ -1,8 +1,7 @@
 export enum AssetType{
-    OBJECT,
-    TEXTURE,
-    AUDIO,
-    FONT,
-    GUI,
-    VFX
+    OBJECT = 'Object',
+    TEXTURE = 'Texture',
+    AUDIO = 'Audio',
+    ANIMATION = 'Animation'
+    
 }

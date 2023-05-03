@@ -22,17 +22,17 @@
                 <div  class="d-flex align-items-start col-5 mb-3">
                     <input type="text" [(ngModel)]="newTag" class="form-control" placeholder="Add a tag" aria-label="name" >
                     <button class="btn btn-info ms-2 me-2" (click)="addTag(newTag)" ><i class="bi bi-plus"></i></button>
-                    <select [(ngModel)]="assetType" class="form-select">
-                        <option value="OBJECT">Object</option>
-                        <option value="TEXTURE">Texture</option>
-                        <option value="AUDIO">Audio</option>
-                        <option value="VFX">VFX</option>
-                        <option value="GUI">GUI</option>
+                    <select class="form-select" (change)="changeType($event)">
+                        <option value=""> Select a type...</option>
+                        <option *ngFor="let type of types | keyvalue" [value]="type.value">{{type.value}}</option>
                       </select>
                 </div>
                 <div class="d-flex"> 
                     <span  *ngFor="let tag of tags; index as i" class="badge rounded-pill text-bg-primary me-2 mb-2">{{tag}}
                        <i class="bi bi-x" (click)="removeTag(i)"></i>
+                    </span>
+                    <span *ngIf="assetTypeError != ''"
+                        style="font-size: 12px; color: red; ">{{assetTypeError}}
                     </span>
                 </div>
             </div>

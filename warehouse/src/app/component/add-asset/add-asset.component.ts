@@ -4,6 +4,8 @@ import { AssetService } from 'src/app/service/asset.service';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import * as alertify from 'alertifyjs'
 import { Router } from '@angular/router';
+import { AssetType } from 'src/app/model/asset-type';
+import { Asset } from 'src/app/model/asset';
 
 @Component({
   selector: 'app-add-asset',
@@ -16,7 +18,7 @@ export class AddAssetComponent{
     private authService: AuthenticationService,
     private assetService: AssetService,
     private router: Router) { }
- 
+  
   id?: number
   user?: User
   assetName: string = ""
@@ -27,6 +29,8 @@ export class AddAssetComponent{
   nameError: string = ""
   fileError: string = ""
   imageError: string = ""
+  assetTypeError: string = ""
+  error: boolean = false
 
   file: any
   image: any
@@ -35,6 +39,8 @@ export class AddAssetComponent{
   imageSrc: string = ""
   gallerySrc: string[] = []
   counter: number = 0
+
+  types = AssetType;
 
   onFileInput(files: FileList | null): void {
     if (files) {
@@ -75,22 +81,14 @@ export class AddAssetComponent{
 
   upload(): void{
 
-    if(this.assetName == "") {
-      this.nameError = "Please enter a name for this asset..."
-    }
-    else if (this.image == null){
-      this.imageError = "Please select a main image for this asset..."
-    }
-    else if(this.file == null){
-      this.fileError = "Please select a zipped archive to upload..."
-    }
-    else {
-
+    this.validate()
+  
+    if(this.assetName != "" && this.assetType != "" && this.image != null && this.file != null) {
       var asset = {
         userId: this.authService.loggedUser?.id,
         name: this.assetName,
         description: this.assetDescription,
-        assetType: this.assetType
+        assetType: this.assetType.toUpperCase()
       }
       console.log(asset)
 
@@ -106,15 +104,33 @@ export class AddAssetComponent{
       }
 
       this.assetService.uploadAsset(formData).subscribe({
-        next:() => 
+        next:(asset: Asset) => 
         { 
           alertify.notify("File Successfully Uploaded!", "", 5)
-          this.router.navigate(['/user/' + this.authService.loggedUser?.id])
+          this.router.navigate(['/asset/' + asset.id])
         },
         error:() => {}
       })
-
     }
+  }
+
+  validate(){
+    
+    if(this.assetName == "") {
+      this.nameError = "Please enter a name for this asset..."
+    }
+    
+    if (this.assetType == ""){
+      this.assetTypeError = "Please select a type"
+    }
+    if (this.image == null){
+      this.imageError = "Please select a main image for this asset..."
+    }
+    
+    if(this.file == null){
+      this.fileError = "Please select a zipped archive to upload..."
+    }
+  
   }
 
   addTag(newTag: string){
@@ -138,6 +154,12 @@ export class AddAssetComponent{
 
   updateName(){
     this.nameError = ""
+  }
+
+  changeType(event: any){
+    this.assetType = event.target.value
+    if(this.assetType != "")
+      this.assetTypeError = ""
   }
 
 }
