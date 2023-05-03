@@ -1,92 +1,112 @@
 <div class="main-container">
-    <div *ngIf="loaded else notLoaded" class="row d-flex">
-        <div class="row justify-content-evenly">
-            <div class="col-6">
-                <div class="card" style="background-color: rgb(32, 32, 32);">
-                    <div class="card-body">
-                        <div class=" flex-column align-items-left text-center">
-                            <div id="assetImages" class="carousel slide">
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <img class="d-block w-100"
-                                            src="assets/user_id_{{asset.userId}}/asset_id_{{asset.id}}/main.jpg"
-                                            alt="main_pic">
-                                    </div>
-                                    <div *ngIf="asset.imagePaths.length > 1">
-                                        <div *ngFor="let image of asset.imagePaths.slice(1); index as i;"
-                                            class="carousel-item">
+    <div *ngIf="assetFound else assetNotFound">
+        <div *ngIf="loaded else notLoaded" class="row d-flex">
+            <div class="row justify-content-evenly">
+                <div class="col-6">
+                    <div class="card" style="background-color: rgb(32, 32, 32);">
+                        <div class="card-body">
+                            <div class=" flex-column align-items-left text-center">
+                                <div id="assetImages" class="carousel slide">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
                                             <img class="d-block w-100"
-                                                src="assets/user_id_{{asset.userId}}/asset_id_{{asset.id}}/gallery{{i+1}}.jpg"
-                                                alt="gallery_pic">
+                                                src="assets/user_id_{{asset.userId}}/asset_id_{{asset.id}}/main.jpg"
+                                                alt="main_pic">
+                                        </div>
+                                        <div *ngIf="asset.imagePaths.length > 1">
+                                            <div *ngFor="let image of asset.imagePaths.slice(1); index as i;"
+                                                class="carousel-item">
+                                                <img class="d-block w-100"
+                                                    src="assets/user_id_{{asset.userId}}/asset_id_{{asset.id}}/gallery{{i+1}}.jpg"
+                                                    alt="gallery_pic">
+                                            </div>
                                         </div>
                                     </div>
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#assetImages"
+                                        data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#assetImages"
+                                        data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
                                 </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#assetImages"
-                                    data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#assetImages"
-                                    data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class=" col-6">
-                <div class="card" style="background-color: rgb(32, 32, 32);">
-                    <div class="card-body">
-                        <div class="d-flex flex-column text-left">
-                            <div *ngIf="authService.isLoggedIn$ | async" class="d-flex">
-                                <h4>{{asset.name}}</h4> 
-                                <i *ngIf="liked && authService.loggedUser?.id != asset.userId else notLiked" class="bi bi-heart-fill like ms-auto" (click)="like()" onmouseover="this.className = 'bi bi-heart no-like ms-auto'" onmouseout="this.className = 'bi bi-heart-fill ms-auto like'"></i>
-                                <ng-template #notLiked>
-                                    <i *ngIf="!liked && authService.loggedUser?.id != asset.userId" class="bi bi-heart no-like ms-auto" (click)="like()" onmouseover="this.className = 'bi bi-heart-fill like ms-auto'" onmouseout="this.className = 'bi bi-heart no-like ms-auto'"></i>
-                                </ng-template>
+                <div class=" col-6">
+                    <div class="card" style="background-color: rgb(32, 32, 32);">
+                        <div class="card-body">
+                            <div class="d-flex flex-column text-left">
+                                <div *ngIf="authService.isLoggedIn$ | async" class="d-flex">
+                                    <h4>{{asset.name}}</h4> 
+                                    <i *ngIf="liked && authService.loggedUser?.id != asset.userId else notLiked" class="bi bi-heart-fill like ms-auto" (click)="like()" onmouseover="this.className = 'bi bi-heart no-like ms-auto'" onmouseout="this.className = 'bi bi-heart-fill ms-auto like'"></i>
+                                    <ng-template #notLiked>
+                                        <i *ngIf="!liked && authService.loggedUser?.id != asset.userId" class="bi bi-heart no-like ms-auto" (click)="like()" onmouseover="this.className = 'bi bi-heart-fill like ms-auto'" onmouseout="this.className = 'bi bi-heart no-like ms-auto'"></i>
+                                    </ng-template>
+                                </div>
+                                <p> by <strong><a class="link-opacity-10 text-info"
+                                            href="http://localhost:4200/user/{{asset.userId}}">{{asset.author}}</a></strong>
+                                </p>
+                                <button class="btn btn-info btn-md" style="width: auto;" (click)="download()"><i
+                                        class="bi bi-download"></i> Download</button>
+                                <div class="d-flex" style="margin-top: 10px;">
+                                    <p *ngIf="asset.downloads == 1"class="text-muted text-sm me-2"><i
+                                            class="bi bi-file-earmark-arrow-down-fill"></i> {{asset.downloads}} dl</p>
+                                    <p *ngIf="asset.downloads != 1" class="text-muted text-sm me-2"><i
+                                            class="bi bi-file-earmark-arrow-down-fill"></i> {{asset.downloads}} dls</p>
+                                    <p *ngIf="asset.userIdLikes.length == 1" class="text-muted text-sm"><i
+                                            class="bi bi-heart-fill"></i> {{asset.userIdLikes.length}} like</p>
+                                    <p *ngIf="asset.userIdLikes.length != 1" class="text-muted text-sm"><i
+                                            class="bi bi-heart-fill"></i> {{asset.userIdLikes.length}} likes</p>
+                                </div>
+                                <hr>
+                                <p class="text-muted font-size-sm">{{asset.description}}</p>
                             </div>
-                            <p> by <strong><a class="link-opacity-10 text-info"
-                                        href="http://localhost:4200/user/{{asset.userId}}">{{asset.author}}</a></strong>
-                            </p>
-                            <button class="btn btn-info btn-md" style="width: auto;" (click)="download()"><i
-                                    class="bi bi-download"></i> Download</button>
-                            <div class="d-flex" style="margin-top: 10px;">
-                                <p *ngIf="asset.downloads == 1"class="text-muted text-sm me-2"><i
-                                        class="bi bi-file-earmark-arrow-down-fill"></i> {{asset.downloads}} dl</p>
-                                <p *ngIf="asset.downloads != 1" class="text-muted text-sm me-2"><i
-                                        class="bi bi-file-earmark-arrow-down-fill"></i> {{asset.downloads}} dls</p>
-                                <p *ngIf="asset.userIdLikes.length == 1" class="text-muted text-sm"><i
-                                        class="bi bi-heart-fill"></i> {{asset.userIdLikes.length}} like</p>
-                                <p *ngIf="asset.userIdLikes.length != 1" class="text-muted text-sm"><i
-                                        class="bi bi-heart-fill"></i> {{asset.userIdLikes.length}} likes</p>
+                            <div class="row d-flex">
+                                <div class="align-items-end">
+                                    <small class="text-muted " style="font-size: 8px; text-decoration: none;"><i
+                                            class="bi bi-calendar-week"></i>
+                                        {{asset.uploadDate}}</small>
+                                    <small *ngIf="edited" class="text-secondary "
+                                        style="margin-left: 5px; font-size: 8px; text-decoration: none;">
+                                        <strong>(Last Modified: {{asset.uploadDate}})</strong></small>
+                                </div>
                             </div>
-                            <hr>
-                            <p class="text-muted font-size-sm">{{asset.description}}</p>
-                        </div>
-                        <div class="row d-flex">
-                            <div class="align-items-end">
-                                <small class="text-muted " style="font-size: 8px; text-decoration: none;"><i
-                                        class="bi bi-calendar-week"></i>
-                                    {{asset.uploadDate}}</small>
-                                <small *ngIf="edited" class="text-secondary "
-                                    style="margin-left: 5px; font-size: 8px; text-decoration: none;">
-                                    <strong>(Last Modified: {{asset.uploadDate}})</strong></small>
+                            <div *ngIf="asset.userId == authService.loggedUser?.id" class="row justify-content-end">
+                                <button class="btn btn-secondary btn-sm text-muted" style="width: auto;"><i
+                                        class="bi bi-pencil-fill"></i> Edit Item</button>
                             </div>
-                        </div>
-                        <div *ngIf="asset.userId == authService.loggedUser?.id" class="row justify-content-end">
-                            <button class="btn btn-secondary btn-sm text-muted" style="width: auto;"><i
-                                    class="bi bi-pencil-fill"></i> Edit Item</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <ng-template #notLoaded>
+            <div class="row">
+                <h6 class="text-info"> <i class="bi bi-arrow-clockwise"></i> Loading...</h6>
+            </div>
+        </ng-template>
+
     </div>
-    <ng-template #notLoaded>
-        <div class="row">
-            <h6 class="text-info"> <i class="bi bi-arrow-clockwise"></i> Loading...</h6>
+    <ng-template #assetNotFound>
+        <div class="d-flex justify-content-center">
+            <i class="bi bi bi-emoji-neutral-fill text-info " style="font-size: 70px;"></i>
+        </div>
+        
+        <div class="d-flex justify-content-center">
+            <h3> <strong>Oops!</strong></h3>  
+        </div>
+        <div class="d-flex justify-content-center">
+          <h6> This asset can not be found... Wonder where did it go?</h6>
+      </div>
+        <hr>
+        <br>
+        <div class="d-flex justify-content-center">
+            <a href="http://localhost:4200" class="link-primary">Home</a>
         </div>
     </ng-template>
 

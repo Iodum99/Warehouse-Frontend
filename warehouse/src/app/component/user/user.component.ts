@@ -25,6 +25,7 @@ export class UserComponent implements OnInit {
   user?: User
   isUserLoaded: boolean = false;
   loadAssets: boolean = false;
+  notFound: boolean = false;
 
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe(params => {
@@ -35,7 +36,10 @@ export class UserComponent implements OnInit {
         {
           this.isUserLoaded = true;
         },
-        error: () => {}
+        error: (error) => {
+          if(error.error.statusCode == 404)
+            this.notFound = true
+        }
       })
     });
   }

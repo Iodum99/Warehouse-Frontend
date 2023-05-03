@@ -25,6 +25,7 @@ export class AssetDetailsComponent implements OnInit {
     path: string[] = []
     file: string = ""
     liked: boolean = false
+    assetFound: boolean = true
 
     
   ngOnInit(): void {
@@ -50,7 +51,10 @@ export class AssetDetailsComponent implements OnInit {
                   
           this.loaded = true
         },
-        error: () => {}
+        error: (error) => {
+          if(error.error.statusCode == 404)
+            this.assetFound = false
+        }
       })
     })
   }
