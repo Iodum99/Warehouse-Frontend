@@ -7,6 +7,7 @@ import { UserComponent } from './component/user/user.component';
 import { AssetsComponent } from './component/assets/assets.component';
 import { AssetDetailsComponent } from './component/asset-details/asset-details.component';
 import { VerificationComponent } from './component/verification/verification.component';
+import { AddAssetComponent } from './component/add-asset/add-asset.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: "verification/token/:id",
     component: VerificationComponent
+  },
+  {
+    path: "user/:id/asset/add",
+    component: AddAssetComponent
   }
 ];
 

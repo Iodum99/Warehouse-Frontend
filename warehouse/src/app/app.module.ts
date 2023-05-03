@@ -17,6 +17,7 @@ import { AssetsComponent } from './component/assets/assets.component';
 import { AssetDetailsComponent } from './component/asset-details/asset-details.component';
 import { FavoriteAssetsComponent } from './component/favorite-assets/favorite-assets.component';
 import { VerificationComponent } from './component/verification/verification.component';
+import { AddAssetComponent } from './component/add-asset/add-asset.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { VerificationComponent } from './component/verification/verification.com
     AssetsComponent,
     AssetDetailsComponent,
     FavoriteAssetsComponent,
-    VerificationComponent
+    VerificationComponent,
+    AddAssetComponent
   ],
   imports: [
     BrowserModule,

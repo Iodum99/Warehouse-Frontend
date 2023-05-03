@@ -33,4 +33,8 @@ export class AssetService {
     return this.http.get(environment.baseUrlAssetService + "/favorites/" + id);  
   }
 
+  public uploadAsset(data: FormData): Observable<any>{
+    return this.http.post(environment.baseUrlAssetService, data)
+  }
+
 }
