@@ -4,3 +4,8 @@
     padding: 0 1rem;
     text-align: left;
 }
+
+.bi-x:hover{
+    color: rgb(52, 152, 219);
+}
+
