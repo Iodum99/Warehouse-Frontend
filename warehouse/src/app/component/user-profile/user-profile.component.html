@@ -2,14 +2,14 @@
     <div>
         <div class="row">
             <div class="  align-items-left text-left">
-                <h4 class="text-info"> <strong> {{user?.username}}</strong></h4>
-                <h5 *ngIf="isAdmin" style="margin-left: 5px;" class="text-muted font-size-sm">(Admin)</h5>
-                <p class="font-size-sm"> <strong> {{user?.name}} {{user?.surname}} </strong></p>
+                <h3 class="text-info"> <strong> {{user?.username}}</strong></h3>
+                <h4 *ngIf="isAdmin" style="margin-left: 5px;" class="text-muted font-size-sm">(Admin)</h4>
+                <p class="font-size-md"> <strong> {{user?.name}} {{user?.surname}} </strong></p>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-4">
+            <div class="col-5">
                 <div class="card" style="background-color: rgb(32, 32, 32);">
                     <div class="card-body">
                         <div *ngIf="user?.avatar != null" class=" flex-column align-items-left text-center">
@@ -35,15 +35,15 @@
                     </div>
                 </div>
             </div>
-            <div class=" col-6">
+            <div class=" col-7">
                 <div class="card" style="background-color: rgb(32, 32, 32);">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-left text-left">
-                            <h4>About</h4>
+                            <h3>About</h3>
                             <hr>
                             <p class="text-muted font-size-sm">{{user?.biography || "This person prefers to remain mysterious..."}}</p>
                             <br>
-                            <h4>Interests</h4>
+                            <h3>Interests</h3>
                             <hr>
                             <p class="text-muted font-size-sm">{{user?.interests || "No interests to show..."}} </p>
                         </div>
