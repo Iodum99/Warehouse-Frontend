@@ -61,12 +61,12 @@ export class AddAssetComponent{
   }
 
   onGalleryInput(gallery: FileList | null): void {
-    if (gallery && gallery.length < 4 && this.gallery.length < 4) {
+    if (gallery && gallery.length < 6 && this.gallery.length < 6) {
         this.counter = this.gallery.length
         for(let i=0; i<gallery.length; i++){
 
-          if(this.gallery.length == 3){
-            alertify.notify("You can select up to 3 pictures!", "", 5)
+          if(this.gallery.length == 5){
+            alertify.notify("You can select up to 5 pictures!", "", 5)
             return
           }
           this.gallerySrc.push(URL.createObjectURL(gallery[i]))
@@ -74,7 +74,7 @@ export class AddAssetComponent{
         }
         console.log(this.gallery)
     } else {
-      alertify.notify("You can select up to 3 pictures!", "", 5)
+      alertify.notify("You can select up to 5 pictures!", "", 5)
       this.gallery = []
     } 
   }
@@ -88,7 +88,8 @@ export class AddAssetComponent{
         userId: this.authService.loggedUser?.id,
         name: this.assetName,
         description: this.assetDescription,
-        assetType: this.assetType.toUpperCase()
+        assetType: this.assetType.toUpperCase(),
+        tags: this.tags
       }
       console.log(asset)
 
