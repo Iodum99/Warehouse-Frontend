@@ -1,5 +1,5 @@
 <div class="main-container">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-0">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-0 ">
         <div class="container-fluid">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -10,19 +10,25 @@
                 <a class="nav-link" routerLink=""><i class="bi bi-house-fill" style="font-size: 25px;"></i></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" routerLink="/object"><i class="bi bi-box me-1 text-info" style="font-size: 25px;"></i> <strong>Objects</strong></a>
+                <a class="nav-link" routerLink="/object"><i class="bi bi-box me-1 text-info" style="font-size: 25px"></i>Objects</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" routerLink="/texture"><i class="bi bi-palette me-1 text-warning" style="font-size: 25px;"></i> <strong>Textures</strong></a>
+                <a class="nav-link" routerLink="/texture"><i class="bi bi-palette me-1 text-warning" style="font-size: 25px"></i>Textures</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" routerLink="/audio"><i class="bi bi-volume-up me-1 text-success" style="font-size: 25px;"></i> <strong>Audio</strong></a>
+                <a class="nav-link" routerLink="/audio"><i class="bi bi-volume-up me-1 text-success" style="font-size: 25px"></i>Audio</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" routerLink="/animation"><i class="bi bi-arrows-move me-1 text-danger" style="font-size: 25px;"> </i><strong>Animations</strong></a>
+                <a class="nav-link" routerLink="/animation"><i class="bi bi-arrows-move me-1 text-danger" style="font-size: 25px"> </i>Animations</a>
               </li>
-              <li class="nav-item">
             </ul>
+            <div class="d-flex ms-auto align-items-center">
+              <ul class="navbar-nav me-auto">
+                <li *ngIf="authService.isLoggedIn$ | async" class="nav-item me-auto">
+                  <a class="nav-link" routerLink="/user/{{authService.loggedUser?.id}}/asset/add"><i class="bi bi-plus-square-fill me-1" style="font-size: 25px;"> </i>Add New Asset</a>
+                </li>
+              </ul>
+            </div>
             <div *ngIf="authService.isLoggedIn$ | async; else notlogged">
             </div>
             <div>
