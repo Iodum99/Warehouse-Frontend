@@ -41,4 +41,8 @@ export class AssetService {
     return this.http.put(environment.baseUrlAssetService, data)
   }
 
+  public deleteAsset(id: number): Observable<any>{
+    return this.http.delete(environment.baseUrlAssetService + "/" + id)
+  }
+
 }

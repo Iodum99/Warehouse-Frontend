@@ -95,4 +95,10 @@ export class AssetDetailsComponent implements OnInit {
     })
   }
 
+  deleteAsset(): void{
+    this.assetService.deleteAsset(this.asset.id).subscribe(() => {
+      window.location.href='http://localhost:4200/' + this.asset.assetType
+    })
+  }
+
 }

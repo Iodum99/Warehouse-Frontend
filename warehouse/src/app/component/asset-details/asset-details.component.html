@@ -80,8 +80,10 @@
                                 </div>
                             </div>
                             <div *ngIf="asset.userId == authService.loggedUser?.id" class="row justify-content-end">
-                                <button routerLink="/asset/{{asset.id}}/edit" class="btn btn-secondary btn-sm text-muted" style="width: auto;"><i
-                                        class="bi bi-pencil-fill"></i> Edit Item</button>
+                                <button routerLink="/asset/{{asset.id}}/edit" class="btn btn-dark btn-sm text-muted me-2" style="width: auto;"><i
+                                        class="bi bi-pencil-fill"></i> Edit</button>
+                                <button class="btn btn-dark btn-sm text-muted" style="width: auto;" data-bs-toggle="modal" data-bs-target="#deleteAssetModal"><i
+                                        class="bi bi-trash" style="color: red;"></i> Delete</button>
                             </div>
                         </div>
                     </div>
@@ -112,5 +114,23 @@
             <a href="http://localhost:4200" class="link-primary">Home</a>
         </div>
     </ng-template>
+
+    <div class="modal fade" id="deleteAssetModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="border-color: rgb(32, 32, 32);">
+          <div class="modal-content">
+            <div class="modal-header" style="background-color: rgb(32, 32, 32); border-color: rgb(32, 32, 32);">
+              <h5 class="modal-title" id="staticBackdropLabel">Delete Asset</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="background-color: rgb(32, 32, 32); border-color: rgb(32, 32, 32);">
+              Are you sure you want to <strong style="color: red;">DELETE</strong> this asset?
+            </div>
+            <div class="modal-footer" style="background-color: rgb(32, 32, 32); border-color: rgb(32, 32, 32);">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn" style="color: red;" (click)="deleteAsset()">Absolutely sure</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
 </div>
