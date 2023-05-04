@@ -83,10 +83,10 @@ export class AssetDetailsComponent implements OnInit {
       next:() => 
       {
         if(!this.asset.userIdLikes.includes(this.authService.loggedUser?.id)){
-          alertify.notify("Added this asset to favorites!", "", 5)
+          alertify.success("Added this asset to favorites!")
           this.liked = true
         } else {
-          alertify.notify("Removed this asset from your favorites... :(", "", 5)
+          alertify.error("Removed this asset from your favorites... :(")
           this.liked = false
         }
         this.ngOnInit() 

@@ -42,7 +42,7 @@ export class FavoriteAssetsComponent implements OnInit {
   removeLike(assetId: number, index: number){
     this.assetService.manageLikes(assetId, this.authService.loggedUser?.id).subscribe({
       next:() => {
-        alertify.notify("Removed this asset from your favorites... :(", "", 5)
+        alertify.error("Removed this asset from your favorites... :(")
         this.assets.splice(index, 1)
         if(this.assets.length == 0){
           this.assetsExist = false

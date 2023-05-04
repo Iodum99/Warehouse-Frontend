@@ -48,7 +48,7 @@ export class RegistrationComponent implements OnInit {
         },
         error: (response) => {
           console.log(response)
-          alertify.notify(response.error.message, "", 5)
+          alertify.error(response.error.message)
         }
       })
     }
