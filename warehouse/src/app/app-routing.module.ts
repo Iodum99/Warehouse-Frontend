@@ -12,7 +12,7 @@ import { EditAssetComponent } from './component/edit-asset/edit-asset.component'
 
 const routes: Routes = [
   {
-    path: "home",
+    path: "",
     component: HomepageComponent
   },
   {

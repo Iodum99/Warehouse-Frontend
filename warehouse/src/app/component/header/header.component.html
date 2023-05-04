@@ -5,7 +5,9 @@
             <h1 class="text-info"> <strong> Warehouse </strong></h1>
         </div>
         <div *ngIf="loaded" class="col-6">
-            <div class="dropdown d-flex flex-row-reverse" *ngIf="authService.isLoggedIn$ | async ">
+            <div class="dropdown d-flex align-items-center" *ngIf="authService.isLoggedIn$ | async ">
+                <span class="text-muted ms-auto me-1">{{user?.username}}</span>
+                <span *ngIf="authService.loggedUser?.role == 'ADMIN'" class="text-muted me-2">(ADMIN)</span>
                 <img *ngIf="user?.avatar != null" class="rounded-circle" style="width:48px;height:48px;" alt="avatar1"
                 src="assets\user_id_{{authService.loggedUser?.id}}\avatar.jpg" alt="profile_pic"
                     data-bs-toggle="dropdown" aria-expanded="false" />

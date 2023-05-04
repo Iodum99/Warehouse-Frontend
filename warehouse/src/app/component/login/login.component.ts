@@ -43,7 +43,7 @@ export class LoginComponent {
             
           },
           next: () => {
-            window.location.href="http://localhost:4200/home"
+            window.location.href="http://localhost:4200"
           }
         }
       )
