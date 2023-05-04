@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, BehaviorSubject, tap } from "rxjs";
 import { environment } from 'src/environments/environment.development';
 import { Router, ActivatedRoute } from "@angular/router";
@@ -33,6 +33,8 @@ export class AuthenticationService {
   }
 
   public login(loginData: any): Observable<any>{
+    let headers = new HttpHeaders();
+    headers = headers.append('noToken', 'noToken');
     return this.http.post(environment.baseUrlAuthenticationService + "/login", loginData).pipe(
       tap((response: any) => {                  
         this.storeToken(response.token)

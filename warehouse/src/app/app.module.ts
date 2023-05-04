@@ -21,6 +21,7 @@ import { AddAssetComponent } from './component/add-asset/add-asset.component';
 import { EditAssetComponent } from './component/edit-asset/edit-asset.component';
 import { UsersComponent } from './component/users/users.component';
 import { EditProfileComponent } from './component/edit-profile/edit-profile.component';
+import { AuthInterceptorProvider } from './authentication/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,7 @@ import { EditProfileComponent } from './component/edit-profile/edit-profile.comp
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [AuthInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
