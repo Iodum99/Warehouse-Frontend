@@ -10,6 +10,7 @@ import { VerificationComponent } from './component/verification/verification.com
 import { AddAssetComponent } from './component/add-asset/add-asset.component';
 import { EditAssetComponent } from './component/edit-asset/edit-asset.component';
 import { UsersComponent } from './component/users/users.component';
+import { EditProfileComponent } from './component/edit-profile/edit-profile.component';
 
 const routes: Routes = [
   {
@@ -51,6 +52,10 @@ const routes: Routes = [
   {
     path: "users/all",
     component: UsersComponent
+  },
+  {
+    path: "user/:id/edit",
+    component: EditProfileComponent
   }
 ];
 

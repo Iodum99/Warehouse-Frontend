@@ -1,0 +1,143 @@
+<div class="main-container">
+    <form [formGroup]="updateProfileForm" (ngSubmit)="update()">
+        <div class="row">
+            <div class="col-5">
+                <div class="card mb-3" style="background-color: rgb(32, 32, 32);">
+                    <div class="card-body">
+                        <div *ngIf="newAvatar != null" class=" flex-column align-items-left text-center">
+                            <img src="{{imageSrc}}" alt="profile_pic" class="rounded-circle"
+                                width="150" height="150" style="object-fit:cover;">
+                        </div>
+                        <div *ngIf="newAvatar == null" class=" flex-column align-items-left text-center">
+                            <img src="{{avatarPath}}" alt="profile_pic" class="rounded-circle" width="150" height="150" style="object-fit:cover;">
+                        </div>
+                        <div class="bd-highlight d-inline-flex align-items-center mt-3 ">
+                            <input class="form-control mt-2 mb-2" type="file" #imageInput accept="image/png, image/bmp, image/jpg, image/jpeg"
+                                (change)="onImageInput(imageInput.files)" />
+                            <i class="bi bi-x-circle ms-2" (click)="removeAvatar()"></i>
+                        </div> 
+                        <hr>
+                    </div>
+                </div>
+                <div class="card" style="background-color: rgb(32, 32, 32);">
+                    <div class="card-body">
+                        <span class="text-info">Please enter current password in order to update details...</span>
+                        <div class="form-group mt-2" style="margin-bottom: 10px;">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i
+                                            class="bi bi-key-fill"></i></span>
+                                </div>
+                                <input type="password" class="form-control" name="password"
+                                    formControlName="originalPassword"
+                                    [ngClass]="{'is-invalid': submitted && updateProfileForm.controls.originalPassword.errors}"
+                                    placeholder="Current password" [(ngModel)]="originalPassword" required="required">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group" style="margin-bottom: 10px;">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i
+                                            class="bi bi-lock-fill"></i></span>
+                                </div>
+                                <input type="password" class="form-control" name="password"
+                                    formControlName="newPassword"
+                                    [ngClass]="{'is-invalid': submitted && updateProfileForm.controls.newPassword.errors}"
+                                    placeholder="New password" [(ngModel)]="newPassword">
+                            </div>
+                            <div style="margin-left: 40px;">
+                                <span
+                                    *ngIf="updateProfileForm.value.newPassword && updateProfileForm.controls.newPassword.errors"
+                                    style="color: red; ">Password must be a combination of lower-case, upper-case,
+                                    numbers and at least 9 characters long
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-check2"></i></span>
+                                </div>
+                                <input type="password" class="form-control" name="confirm_password"
+                                    formControlName="confirmNewPassword"
+                                    [ngClass]="{'is-invalid': submitted && updateProfileForm.controls.confirmNewPassword.errors}"
+                                    placeholder="Confirm Password" [(ngModel)]="confirmNewPassword">
+                            </div>
+                            <div style="margin-left: 40px;">
+                                <span class="text-sm"
+                                    *ngIf="updateProfileForm.value.confirmNewPassword && confirmNewPassword != newPassword"
+                                    style="color: red; ">Passwords do not match
+                                </span>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-7">
+                <div class="card" style="background-color: rgb(32, 32, 32);">
+                    <div class="card-body">
+                        <h3 class="text-info"> Basic Information</h3>
+                        <div class="form-group" style="margin-bottom: 10px;">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> Name: </span>
+                                </div>
+                                <input class="form-control" placeholder="Name" [(ngModel)]="name"
+                                    [ngModelOptions]="{standalone: true}">
+                                <div class="input-group-prepend ms-3">
+                                    <span class="input-group-text"> Surname: </span>
+                                </div>
+                                <input class="form-control" placeholder="Last name" [(ngModel)]="surname"
+                                    [ngModelOptions]="{standalone: true}">
+                            </div>
+                        </div>
+                        <div class="form-group mt-3" style="margin-bottom: 10px;">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i
+                                        class="bi bi-envelope-fill"></i></span>
+                            </div>
+                            <input type="email" class="form-control" name="email" formControlName="email"
+                                [ngClass]="{'is-invalid': submitted && updateProfileForm.controls.email.errors}"
+                                placeholder="Email Address" [(ngModel)]="email" required="required">
+                        </div>
+                        <div style="margin-left: 40px;">
+                            <span *ngIf="updateProfileForm.value.email && updateProfileForm.controls.email.errors"
+                                style="color: red; ">Invalid input
+                            </span>
+                        </div>
+                        <div class="d-inline-flex">
+                            <select (change)="changeType($event)" [(ngModel)]="selectedCountry" [ngModelOptions]="{standalone: true}" class="form-control mt-3" name="country" id="country">
+                                <option value="" disabled>Select Country</option>
+                                <option value=""> Not Specified</option>
+                                <option *ngFor="let country of countries" [value]="country.name">{{country.name}}</option>
+                           </select>
+                        </div>
+                        <div class="d-flex mb-2 mt-3 me-auto">
+                            <span class="text-muted"> Bio: </span>
+                        </div>
+                        <div class="mb-2">
+                            <textarea class="form-control" [(ngModel)]="biography" aria-label="With textarea" [ngModelOptions]="{standalone: true}"
+                                placeholder="Tell us something about yourself..." style="height: 100px;"></textarea>
+                        </div>
+                        <div class="d-flex mb-2 me-auto">
+                            <span class="text-muted"> Description: </span>
+                        </div>
+                        <div class="mb-2">
+                            <textarea class="form-control" [(ngModel)]="interests" aria-label="With textarea" [ngModelOptions]="{standalone: true}"
+                                placeholder="Share your interests..." style="height: 110px;"></textarea>
+                        </div>
+                        <hr>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-sm"
+                                style="width: auto;">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</form>
+</div>

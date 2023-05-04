@@ -25,4 +25,8 @@ export class UserService {
   public getAllUsers(): Observable<any>{
     return this.http.get(environment.baseUrlUserService);
   }
+
+  public updateUser(formData: any): Observable<any>{
+    return this.http.put(environment.baseUrlUserService, formData);
+  }
 }

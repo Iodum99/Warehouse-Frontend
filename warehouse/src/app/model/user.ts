@@ -7,8 +7,8 @@ export interface User{
     interests: string
     biography: string
     country: string
-    avatar: BigInt64Array
-    dateOfBirth: Date
-    role: String
+    avatar: string
+    role: String,
+    joinDate: Date
 
 }

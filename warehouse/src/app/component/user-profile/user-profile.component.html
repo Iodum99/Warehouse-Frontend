@@ -22,7 +22,7 @@
                         </div>
                         <div class=" flex-column align-items-left text-left" style="margin: 10px;">
                             <p *ngIf="user?.country != null" class="text-muted font-size-sm">Country: {{user?.country}} </p>
-                            <p *ngIf="user?.dateOfBirth != null" class="text-muted font-size-sm">Birthday: {{user?.dateOfBirth}} </p>
+                            <p *ngIf="user?.joinDate != null" class="text-muted font-size-sm">Joined: {{user?.joinDate}} </p>
                         </div>
                         <div class=" flex-column align-items-left text-center" *ngIf="canEdit">
                             <hr>
