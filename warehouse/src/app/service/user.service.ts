@@ -21,4 +21,8 @@ export class UserService {
   public verify(tokenId: any): Observable<any>{
     return this.http.put(environment.baseUrlVerifTokenService + "/verify/" + tokenId, null);
   }
+
+  public getAllUsers(): Observable<any>{
+    return this.http.get(environment.baseUrlUserService);
+  }
 }

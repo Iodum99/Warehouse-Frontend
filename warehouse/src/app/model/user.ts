@@ -1,4 +1,5 @@
 export interface User{
+    id: number
     username: string
     email: string
     name: string
@@ -8,5 +9,6 @@ export interface User{
     country: string
     avatar: BigInt64Array
     dateOfBirth: Date
+    role: String
 
 }

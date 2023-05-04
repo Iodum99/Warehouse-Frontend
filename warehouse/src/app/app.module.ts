@@ -19,6 +19,7 @@ import { FavoriteAssetsComponent } from './component/favorite-assets/favorite-as
 import { VerificationComponent } from './component/verification/verification.component';
 import { AddAssetComponent } from './component/add-asset/add-asset.component';
 import { EditAssetComponent } from './component/edit-asset/edit-asset.component';
+import { UsersComponent } from './component/users/users.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { EditAssetComponent } from './component/edit-asset/edit-asset.component'
     FavoriteAssetsComponent,
     VerificationComponent,
     AddAssetComponent,
-    EditAssetComponent
+    EditAssetComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,

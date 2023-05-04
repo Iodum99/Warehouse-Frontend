@@ -9,6 +9,7 @@ import { AssetDetailsComponent } from './component/asset-details/asset-details.c
 import { VerificationComponent } from './component/verification/verification.component';
 import { AddAssetComponent } from './component/add-asset/add-asset.component';
 import { EditAssetComponent } from './component/edit-asset/edit-asset.component';
+import { UsersComponent } from './component/users/users.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,10 @@ const routes: Routes = [
   {
     path: "asset/:id/edit",
     component: EditAssetComponent
+  },
+  {
+    path: "users/all",
+    component: UsersComponent
   }
 ];
 
