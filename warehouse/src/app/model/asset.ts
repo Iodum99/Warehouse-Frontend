@@ -15,6 +15,7 @@ export class Asset{
     userIdLikes: number[]
     tags: string[]
     extensions: string[]
+    size: string
 
     constructor(){
         this.id = 0
@@ -31,5 +32,6 @@ export class Asset{
         this.userIdLikes = []
         this.tags = []
         this.extensions = []
+        this.size = ""
     }
 }
