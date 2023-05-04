@@ -107,10 +107,12 @@ export class AddAssetComponent{
       this.assetService.uploadAsset(formData).subscribe({
         next:(asset: Asset) => 
         { 
-          alertify.notify("File Successfully Uploaded!", "", 5)
+          alertify.success("File Successfully Uploaded!")
           this.router.navigate(['/asset/' + asset.id])
         },
-        error:() => {}
+        error:(error) => {
+          alertify.error(error.error.message)
+        }
       })
     }
   }

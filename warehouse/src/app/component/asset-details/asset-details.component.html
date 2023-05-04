@@ -64,6 +64,7 @@
                                             class="bi bi-heart-fill"></i> {{asset.userIdLikes.length}} likes</p>
                                 </div>
                                 <div>
+                                    <span  *ngFor="let extension of asset.extensions; index as i" class="badge rounded-pill text-bg-warning me-2 mb-2">.{{extension}}</span>
                                     <span  *ngFor="let tag of asset.tags; index as i" class="badge rounded-pill text-bg-info me-2 mb-2">{{tag}}</span>
                                 </div>
                                 <hr>

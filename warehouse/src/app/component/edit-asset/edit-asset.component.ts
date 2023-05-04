@@ -25,11 +25,9 @@ export class EditAssetComponent implements OnInit {
 
     assetName: string = ""
     assetDescription: string = ""
-    assetType: string = ""
     tags: string[] = []
     newTag: string = ""
     nameError: string = ""
-    assetTypeError: string = ""
 
     file: any
     image: any
@@ -51,7 +49,6 @@ export class EditAssetComponent implements OnInit {
 
             this.assetName = this.asset.name
             this.assetDescription = this.asset.description
-            this.assetType = this.assetType
             this.tags = this.asset.tags
             this.file = this.asset.filePath
           },
@@ -96,11 +93,11 @@ export class EditAssetComponent implements OnInit {
     } 
   }
 
-  upload(): void{
+  update(): void{
 
     this.validate()
   
-    if(this.assetName != "" && this.assetType != "") {
+    if(this.assetName != "") {
       var asset = {
         
         id: this.asset.id,
@@ -108,14 +105,15 @@ export class EditAssetComponent implements OnInit {
         author: this.asset.author,
         name: this.assetName,
         description: this.assetDescription,
-        assetType: this.assetType.toUpperCase(),
+        assetType: this.asset.assetType,
         tags: this.tags,
         uploadDate: this.asset.uploadDate,
         filePath: this.asset.filePath,
         imagePaths: this.asset.imagePaths,
         userIdLikes: this.asset.userIdLikes,
         downloads: this.asset.downloads,
-        lastModifiedDate: this.asset.lastModifiedDate
+        lastModifiedDate: this.asset.lastModifiedDate,
+        extensions: this.asset.extensions
       }
       console.log(asset)
 
@@ -131,12 +129,15 @@ export class EditAssetComponent implements OnInit {
       }
 
       this.assetService.updateAsset(formData).subscribe({
-        next:() => 
+        next:(response) => 
         { 
-          alertify.notify("File Successfully Updated!", "", 5)
-          this.router.navigate(['/asset/' + this.asset.id])
+         alertify.notify("File Successfully Updated!", "", 5)
+         this.router.navigate(['/asset/' + this.asset.id])
         },
-        error:() => {}
+        error:(error) => {
+  
+          alertify.error(error.error.message)
+        }
       })
     }
   }
@@ -147,9 +148,6 @@ export class EditAssetComponent implements OnInit {
       this.nameError = "Please enter a name for this asset..."
     }
     
-    if (this.assetType == ""){
-      this.assetTypeError = "Please select a type"
-    }
   }
 
   addTag(newTag: string){
@@ -175,9 +173,4 @@ export class EditAssetComponent implements OnInit {
     this.nameError = ""
   }
 
-  changeType(event: any){
-    this.assetType = event.target.value
-    if(this.assetType != "")
-      this.assetTypeError = ""
-  }
 }
