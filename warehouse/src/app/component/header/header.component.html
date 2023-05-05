@@ -8,7 +8,7 @@
             <div class="dropdown d-flex align-items-center" *ngIf="authService.isLoggedIn$ | async ">
                 <span class="text-muted ms-auto me-1">{{user?.username}}</span>
                 <span *ngIf="authService.loggedUser?.role == 'ADMIN'" class="text-muted me-2">(Superuser)</span>
-                <img class="rounded-circle" style="width:48px;height:48px;" alt="avatar1"
+                <img class="rounded-circle" style="object-fit:cover" width="48" height="48" alt="avatar"
                 src="{{avatarSource}}" alt="profile_pic"
                     data-bs-toggle="dropdown" aria-expanded="false" />
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">

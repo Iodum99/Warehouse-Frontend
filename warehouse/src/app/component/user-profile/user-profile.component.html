@@ -13,8 +13,7 @@
                 <div class="card" style="background-color: rgb(32, 32, 32);">
                     <div class="card-body">
                         <div class=" flex-column align-items-left text-center">
-                            <img src="{{avatarSource}}" alt="profile_pic" class="rounded-circle"
-                                width="150">       
+                            <img src="{{avatarSource}}" alt="profile_pic" class="rounded-circle" style="object-fit:cover" width="200"  height="200">       
                         </div>
                         <div class=" flex-column align-items-left text-left" style="margin: 10px;">
                             <p *ngIf="user?.country != null" class="text-muted font-size-sm">Country: {{user?.country}} </p>
