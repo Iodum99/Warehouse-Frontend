@@ -13,6 +13,13 @@ export class TokenInterceptor implements HttpInterceptor {
   constructor(private authService: AuthenticationService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    
+    if(this.authService.token != null && this.authService.tokenExpired(this.authService.token)){
+      console.log("Token expired, user will be logged out")
+      localStorage.removeItem("regUserToken")
+      this.authService.logout()
+    }
+      
 
     if(this.authService.token == null)
         skipAuth = ""

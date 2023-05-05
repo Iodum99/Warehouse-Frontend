@@ -22,8 +22,12 @@ export class UserService {
     return this.http.put(environment.baseUrlVerifTokenService + "/verify/" + tokenId, null);
   }
 
-  public getAllUsers(): Observable<any>{
+  public getAllUsersAdmin(): Observable<any>{
     return this.http.get(environment.baseUrlUserService);
+  }
+
+  public getAllActiveUsers(): Observable<any>{
+    return this.http.get(environment.baseUrlUserService + "/enabled");
   }
 
   public updateUser(formData: any): Observable<any>{

@@ -15,7 +15,7 @@ export class UsersComponent implements OnInit {
   loaded: boolean = false
   
   ngOnInit(): void {
-    this.userService.getAllUsers().subscribe({
+    this.userService.getAllActiveUsers().subscribe({
       next: (loadedUsers: User[]) => 
       {
         this.users = loadedUsers

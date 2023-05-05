@@ -33,8 +33,6 @@ export class AuthenticationService {
   }
 
   public login(loginData: any): Observable<any>{
-    let headers = new HttpHeaders();
-    headers = headers.append('noToken', 'noToken');
     return this.http.post(environment.baseUrlAuthenticationService + "/login", loginData).pipe(
       tap((response: any) => {                  
         this.storeToken(response.token)
@@ -61,5 +59,10 @@ export class AuthenticationService {
     this.router.navigate([currentUrl]);
     });
   } 
+
+  public tokenExpired(token: string) {
+    const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
+    return (Math.floor((new Date).getTime() / 1000)) >= expiry;
+  }
 
 }
