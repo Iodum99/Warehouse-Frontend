@@ -18,6 +18,7 @@ export class UserProfileComponent implements OnInit {
   canEdit: boolean = false
   user?: User
   isAdmin:boolean = false
+  avatarSource: string = ''
 
   ngOnInit(): void {
     this.userService.getUser(this.id).subscribe({
@@ -27,7 +28,7 @@ export class UserProfileComponent implements OnInit {
         this.user = user
         if(this.user.username === this.authService.loggedUser?.sub)
           this.canEdit = true;
-          
+        this.avatarSource = this.user.avatar.split('src\\')[1]
       },
       error: () => {}
     })   

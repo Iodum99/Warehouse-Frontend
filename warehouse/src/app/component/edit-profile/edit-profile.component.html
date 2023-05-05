@@ -4,12 +4,9 @@
             <div class="col-5">
                 <div class="card mb-3" style="background-color: rgb(32, 32, 32);">
                     <div class="card-body">
-                        <div *ngIf="newAvatar != null" class=" flex-column align-items-left text-center">
-                            <img src="{{imageSrc}}" alt="profile_pic" class="rounded-circle"
+                        <div class=" flex-column align-items-left text-center">
+                            <img src="{{avatarSource}}" alt="profile_pic" class="rounded-circle"
                                 width="150" height="150" style="object-fit:cover;">
-                        </div>
-                        <div *ngIf="newAvatar == null" class=" flex-column align-items-left text-center">
-                            <img src="{{avatarPath}}" alt="profile_pic" class="rounded-circle" width="150" height="150" style="object-fit:cover;">
                         </div>
                         <div class="bd-highlight d-inline-flex align-items-center mt-3 ">
                             <input class="form-control mt-2 mb-2" type="file" #imageInput accept="image/png, image/bmp, image/jpg, image/jpeg"

@@ -21,7 +21,9 @@ export class EditProfileComponent implements OnInit {
 
   user?: User
   newAvatar: any
-  avatarPath: string = "assets/default_avatar.png"
+  avatarSource: string = ""
+  removedAvatar: boolean = false
+  avatarPath: string = ""
 
   newPassword: string = ""
   originalPassword: string = ""
@@ -34,7 +36,6 @@ export class EditProfileComponent implements OnInit {
   interests: string = ""
   selectedCountry: string = ""
 
-  imageSrc: string = ""
   
   public countries:any = countries
 
@@ -61,8 +62,8 @@ export class EditProfileComponent implements OnInit {
         this.selectedCountry = loadedUser.country
         this.biography = loadedUser.biography
         this.interests = loadedUser.interests  
-        if(loadedUser.avatar != null)
-          this.avatarPath = "assets/user_id_" + this.user.id + "/avatar.jpg"  
+        this.avatarSource = loadedUser.avatar.split('src\\')[1]
+        this.avatarPath = loadedUser.avatar
       },
       error:() => {}
     })
@@ -73,13 +74,17 @@ export class EditProfileComponent implements OnInit {
       this.newAvatar = images.item(0)
       
       if(this.newAvatar != null)
-      this.imageSrc = URL.createObjectURL(this.newAvatar)
+      this.avatarSource = URL.createObjectURL(this.newAvatar)
       
     }
   }
   
   update(): void{
 
+    if(this.removedAvatar)
+      this.avatarPath = this.user?.avatar.split('assets\\')[0] + 'assets\\\\default_avatar.png'
+
+    console.log(this.avatarPath)  
     this.submitted = true
     if(this.updateProfileForm.valid && this.newPassword == this.confirmNewPassword){
       var user = {
@@ -93,7 +98,7 @@ export class EditProfileComponent implements OnInit {
         interests: this.interests,
         newPassword: this.newPassword,
         password: this.originalPassword,
-        avatar: null
+        avatar: this.avatarPath
       }
       console.log(user)
       const formData: FormData = new FormData();
@@ -119,7 +124,8 @@ export class EditProfileComponent implements OnInit {
   }
 
   removeAvatar(): void{
-    this.avatarPath = "assets/default_avatar.png"
+    this.avatarSource = "assets/default_avatar.png"
+    this.removedAvatar = true
   }
 
 }

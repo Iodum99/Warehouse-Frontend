@@ -19,17 +19,13 @@
                 <a *ngFor="let user of users; index as i" class="card mx-auto" href="http://localhost:4200/user/{{user.id}}" 
                 style="background-color: rgb(32, 32, 32); max-width: 250px; margin-bottom: 10px; color: white; text-decoration: none;">
                     <div class="card-body">
-                        <div *ngIf="user?.avatar != null" class=" flex-column align-items-left text-center">
-                            <img src="assets\user_id_{{user.id}}\avatar.jpg" alt="profile_pic" class="rounded-circle"
-                                width="150">       
-                        </div>
-                        <div *ngIf="user?.avatar == null" class=" flex-column align-items-left text-center">
-                            <img src="assets\default_avatar.png" alt="profile_pic" class="rounded-circle"
+                        <div class=" flex-column align-items-left text-center">
+                            <img src="{{user.avatar.split('src\\')[1]}}" alt="profile_pic" class="rounded-circle"
                                 width="150">       
                         </div>
                         <hr>
                         <div class="flex-column text-center" style="margin: auto;">  
-                            <p class="text-info">{{user.username}}</p> <span *ngIf="user.role == 'ADMIN' " class="text-muted"> (ADMIN) </span>
+                            <p class="text-info">{{user.username}}</p> <span *ngIf="user.role == 'ADMIN' " class="text-muted"> (Superuser) </span>
                         </div>
                     </div>
                 </a>

@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
 
     user?: User
     loaded: boolean = false
+    avatarSource: string = ""
 
     ngOnInit(): void {
       if(this.authService.token != null){ 
@@ -26,6 +27,9 @@ export class HeaderComponent implements OnInit {
             console.log("Loaded user!")
             this.user = user
             this.loaded = true
+            this.avatarSource = this.user.avatar.split('src\\')[1]
+            console.log("AVATAR")
+            console.log(this.avatarSource)
           },
           error: () => {}
         })     

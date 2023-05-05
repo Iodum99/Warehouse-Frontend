@@ -12,12 +12,8 @@
             <div class="col-5">
                 <div class="card" style="background-color: rgb(32, 32, 32);">
                     <div class="card-body">
-                        <div *ngIf="user?.avatar != null" class=" flex-column align-items-left text-center">
-                            <img src="assets\user_id_{{id}}\avatar.jpg" alt="profile_pic" class="rounded-circle"
-                                width="150">       
-                        </div>
-                        <div *ngIf="user?.avatar == null" class=" flex-column align-items-left text-center">
-                            <img src="assets\default_avatar.png" alt="profile_pic" class="rounded-circle"
+                        <div class=" flex-column align-items-left text-center">
+                            <img src="{{avatarSource}}" alt="profile_pic" class="rounded-circle"
                                 width="150">       
                         </div>
                         <div class=" flex-column align-items-left text-left" style="margin: 10px;">
