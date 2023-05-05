@@ -15,8 +15,8 @@
             </div>
         </div>
         <div class="col-8 ">
-            <div *ngIf="loaded else notLoaded" class="row ">
-                <a *ngFor="let user of users; index as i" class="card mx-auto" href="http://localhost:4200/user/{{user.id}}" 
+            <div *ngIf="loaded else notLoaded" class="card-grid">
+                <a *ngFor="let user of users; index as i" class="card" href="http://localhost:4200/user/{{user.id}}" 
                 style="background-color: rgb(32, 32, 32); max-width: 250px; margin-bottom: 10px; color: white; text-decoration: none;">
                     <div class="card-body">
                         <div class=" flex-column align-items-left text-center">

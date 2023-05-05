@@ -15,7 +15,7 @@ export class UserComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute, 
-    private authService: AuthenticationService,
+    public authService: AuthenticationService,
     private userService: UserService){}
  
     private routeSub: Subscription = new Subscription;

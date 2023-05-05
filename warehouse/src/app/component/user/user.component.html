@@ -38,7 +38,7 @@
                 <li><a class="dropdown-item" href="javascript:void(0);" (click)="setType('ANIMATION')">Animation</a></li>
               </ul>
             </div>
-            <div class="p-2">
+            <div *ngIf="authService.isLoggedIn$ | async " class="p-2">
               <button class="btn btn-success text-sm" routerLink="asset/add"><i
                   class="bi bi-plus-square-fill" style="margin-right: 5px;"></i> Add New Asset</button>
             </div>
