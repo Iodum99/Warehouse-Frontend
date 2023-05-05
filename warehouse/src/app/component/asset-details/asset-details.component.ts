@@ -26,6 +26,7 @@ export class AssetDetailsComponent implements OnInit {
     file: string = ""
     liked: boolean = false
     assetFound: boolean = true
+    fileSize: string = ""
 
     
   ngOnInit(): void {
@@ -35,6 +36,7 @@ export class AssetDetailsComponent implements OnInit {
         {
           this.asset = loadedAsset;
           console.log(this.asset)
+          this.fileSize = this.getfileSizeString(this.asset.size)
           
           let path: string[] = this.asset.filePath.split("src", 2)
           this.asset.filePath = path[1]
@@ -57,6 +59,17 @@ export class AssetDetailsComponent implements OnInit {
         }
       })
     })
+  }
+
+  getfileSizeString(size: number): string{
+    var sizeString = ""
+    if ( size < 1000)
+        sizeString = size + " bytes";
+    else if(size < 1000000)
+        sizeString = size/1000 + " kb";
+    else 
+        sizeString = size/1000000 + " Mb";
+    return sizeString;
   }
 
   download(){

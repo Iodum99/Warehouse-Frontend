@@ -52,7 +52,7 @@
                                             href="http://localhost:4200/user/{{asset.userId}}">{{asset.author}}</a></strong>
                                 </p>
                                 <button class="btn btn-info btn-md" style="width: auto;" (click)="download()"><i
-                                        class="bi bi-download"></i> Download ({{asset.size}})</button>
+                                        class="bi bi-download"></i> Download ({{fileSize}})</button>
                                 <div class="d-flex" style="margin-top: 10px;">
                                     <p *ngIf="asset.downloads == 1"class="text-muted text-sm me-2"><i
                                             class="bi bi-file-earmark-arrow-down-fill"></i> {{asset.downloads}} dl</p>
