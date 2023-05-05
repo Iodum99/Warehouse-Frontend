@@ -44,5 +44,12 @@ export class AssetsListComponent implements OnChanges {
       error: () => {}
     })   
   }
+
+  truncate(index: number): string {
+    if(this.assets[index].description.length > 100)
+      return this.assets[index].description.slice(0, 100) + '...'
+    else
+      return this.assets[index].description
+  }
   
 }
