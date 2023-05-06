@@ -8,11 +8,7 @@
     <hr>
     <div class="row">
         <div class="col-4">
-            <div class="card" style="background-color: rgb(32,32,32);">
-                <div class="card-body">
-                    <h6 class="text-warning">TODO: Sorting, Filtering</h6>
-                </div>
-            </div>
+            <app-asset-sort-filter></app-asset-sort-filter>
         </div>
         <div class="col-8">
             <app-assets-list #assets [assetType]="assetType"></app-assets-list>

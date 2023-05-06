@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Asset } from 'src/app/model/asset';
 import { AssetService } from 'src/app/service/asset.service';
 import { AuthenticationService } from 'src/app/service/authentication.service';
@@ -12,19 +13,30 @@ export class AssetsListComponent implements OnChanges {
 
   constructor(
     private assetService: AssetService,
-    public authService: AuthenticationService){}
+    public authService: AuthenticationService,
+    private route: ActivatedRoute){}
 
   assets: Asset[] = []
   assetsExist?: boolean
   public numberOfItems: number = 0
   loaded: boolean = false
+  soryByParam: string = ""
 
   @Input() id?: number = 0
   @Input() assetType?: string = ""
   
   ngOnChanges(): void {
-    console.log("Sending request to fetch assets...")
-    this.assetService.getAssets(this.id, this.assetType).subscribe({
+
+    this.route.queryParams.subscribe((queryParams:any) => {
+      
+      if(queryParams.sortBy)
+        this.soryByParam = queryParams.sortBy;
+      else
+        this.soryByParam = "upload_date_desc"
+
+      //Load Assets
+      console.log("Sending request to fetch assets...")
+      this.assetService.getAssets(this.id, this.assetType, this.soryByParam).subscribe({
       next: (loadedAssets: Asset[]) => 
       {
         console.log("Got Assets!")
@@ -42,7 +54,10 @@ export class AssetsListComponent implements OnChanges {
 
       },
       error: () => {}
-    })   
+    }) 
+     });
+
+      
   }
 
   truncate(index: number): string {

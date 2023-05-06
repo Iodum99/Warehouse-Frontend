@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AssetsListComponent } from '../assets-list/assets-list.component';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-assets',
@@ -12,6 +12,7 @@ export class AssetsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router
   ){}
   
   @ViewChild('asset-list') assets!: AssetsListComponent;

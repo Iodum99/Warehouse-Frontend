@@ -1,0 +1,19 @@
+<div>
+    <div class="card" style="background-color: rgb(32,32,32);">
+        <div class="card-body">
+            <h6 class="text-warning">TODO: Filtering</h6>
+            <br>
+            <select class="form-select" (change)="changeQuery($event)" aria-label="Default select example">
+                <option selected class="text-muted">-- Sort by --</option>
+                <option value="upload_date_desc">Upload Date Newest</option>
+                <option value="upload_date_asc">Upload Date Oldest</option>
+                <option value="name_asc">Name A-Z</option>
+                <option value="name_desc">Name Z-A</option>
+                <option value="downloads_asc">Least Downloads</option>
+                <option value="downloads_desc">Most Downloads</option>
+                <option value="downloads_asc">Least Likes</option>
+                <option value="downloads_desc">Most Likes</option>
+              </select>
+        </div>
+    </div>
+</div>

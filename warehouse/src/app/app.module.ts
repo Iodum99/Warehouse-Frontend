@@ -22,6 +22,7 @@ import { EditAssetComponent } from './component/edit-asset/edit-asset.component'
 import { UsersComponent } from './component/users/users.component';
 import { EditProfileComponent } from './component/edit-profile/edit-profile.component';
 import { AuthInterceptorProvider } from './authentication/auth.interceptor';
+import { AssetSortFilterComponent } from './component/asset-sort-filter/asset-sort-filter.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { AuthInterceptorProvider } from './authentication/auth.interceptor';
     AddAssetComponent,
     EditAssetComponent,
     UsersComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    AssetSortFilterComponent
   ],
   imports: [
     BrowserModule,
