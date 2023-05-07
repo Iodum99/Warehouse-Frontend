@@ -1,10 +1,10 @@
 <div class="main-container">
     <div *ngIf="assetsExist else noAssets" class="card-grid" >
         <div *ngFor="let asset of assets; index as i;" class="card p-3"
-            style="background-color: rgb(32, 32, 32); max-width: 255px;  margin-bottom: 10px;">
+            style="background-color: rgb(32, 32, 32); max-width: 290px;  margin-bottom: 10px;">
             <a routerLink="/asset/{{asset.id}}" style="color: white; text-decoration: none;" >
                 <img class="card-img-top" src="assets/user_id_{{asset.userId}}/asset_id_{{asset.id}}/main.jpg" alt="Card image cap"
-                style="height: 160px;  object-fit:cover; margin-top: 5px;" >     
+                style="height: 190px;  object-fit:cover; margin-top: 5px;" >     
                 <p class="mt-2 text-info"><strong>{{asset.name}}</strong></p> 
             </a> 
             <div class="d-flex flex-column align-items-left text-left" style="margin-top: 5px">
@@ -18,9 +18,9 @@
                 </div>
                 <div class="d-flex" style="margin-top: 10px;">
                     <p class="text-muted text-sm me-2" style="font-size: 16px">
-                        <i class="bi bi-file-earmark-arrow-down-fill"></i> {{asset.downloads}}</p>
+                        <i class="bi bi-file-earmark-arrow-down-fill text-primary"></i> {{asset.downloads}}</p>
                     <p class="text-muted text-sm" style="font-size: 16px">
-                        <i class="bi bi-heart-fill"></i> {{asset.userIdLikes.length}}</p>
+                        <i class="bi bi-heart-fill color-danger" style="color: red;"></i> {{asset.userIdLikes.length}}</p>
                     <small class="text-muted ms-auto " style="font-size: 16px">
                         <i class="bi bi-calendar-week"></i> {{asset.uploadDate}}</small>
                 </div>

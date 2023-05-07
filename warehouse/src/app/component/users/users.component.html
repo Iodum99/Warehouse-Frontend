@@ -7,20 +7,20 @@
     </div>
     <hr>
     <div class="row">
-        <div class="col-4">
+        <div class="col-3">
             <div class="card" style="background-color: rgb(32,32,32);">
                 <div class="card-body">
                     <h6 class="text-warning">TODO: Sorting, Filtering</h6>
                 </div>
             </div>
         </div>
-        <div class="col-8 ">
+        <div class="col-9 ">
             <div *ngIf="loaded else notLoaded" class="card-grid">
                 <a *ngFor="let user of users; index as i" class="card" href="http://localhost:4200/user/{{user.id}}" 
-                style="background-color: rgb(32, 32, 32); max-width: 250px; margin-bottom: 10px; color: white; text-decoration: none;">
+                style="background-color: rgb(32, 32, 32); max-width: 290px; margin-bottom: 10px; color: white; text-decoration: none;">
                     <div class="card-body">
                         <div class=" flex-column align-items-left text-center">
-                            <img src="{{user.avatar.split('src\\')[1]}}" alt="profile_pic" class="rounded-circle" style="object-fit:cover" width="150"  height="150">       
+                            <img src="{{user.avatar.split('src\\')[1]}}" alt="profile_pic" class="rounded-circle" style="object-fit:cover" width="180"  height="180">       
                         </div>
                         <hr>
                         <div class="flex-column text-center" style="margin: auto;">  
