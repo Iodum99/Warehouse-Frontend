@@ -1,0 +1,17 @@
+<div>
+    <div class="card" style="background-color: rgb(32,32,32);">
+        <div class="card-body">
+            <h6 class="text-warning">TODO: Filtering</h6>
+            <br>
+            <select class="form-select" (change)="changeQuery($event)" aria-label="Default select example">
+                <option selected class="text-muted">-- Sort by --</option>
+                <option value="join_date_desc">Join Date Newest</option>
+                <option value="join_date_asc">Join Date Oldest</option>
+                <option value="username_asc">Username A-Z</option>
+                <option value="username_desc">Username Z-A</option>
+                <option value="number_of_assets_asc">Most Assets</option>
+                <option value="number_of_assets_desc">Least Assets</option>
+              </select>
+        </div>
+    </div>
+</div>

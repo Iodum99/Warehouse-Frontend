@@ -10,5 +10,6 @@ export interface User{
     avatar: string
     role: String,
     joinDate: Date
+    numberOfAssets: number
 
 }
