@@ -2,7 +2,8 @@
     <div *ngIf="assets.loaded" style="background-color: rgb(32, 32, 32); margin-bottom: 5px; padding: 5px ;height: 3rem;">
         <div class="d-flex align-items-end text-left">
             <h4> <i class="bi bi-bar-chart-fill text-primary me-2"></i> </h4>
-            <h4 class="text-muted"> Total number: {{assets.numberOfItems}} </h4>
+            <h4 *ngIf="assets.numberOfItems == 1" class="text-muted"> {{assets.numberOfItems}} asset </h4>
+            <h4 *ngIf="assets.numberOfItems != 1" class="text-muted"> {{assets.numberOfItems}} assets </h4>
         </div>
     </div>
     <hr>

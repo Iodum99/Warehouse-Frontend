@@ -1,17 +1,24 @@
 <div>
     <div class="card" style="background-color: rgb(32,32,32);">
         <div class="card-body">
-            <h6 class="text-warning">TODO: Filtering</h6>
-            <br>
             <select class="form-select" (change)="changeQuery($event)" aria-label="Default select example">
-                <option selected class="text-muted">-- Sort by --</option>
+                <option selected disabled class="text-muted">-- Sort by --</option>
                 <option value="join_date_desc">Join Date Newest</option>
                 <option value="join_date_asc">Join Date Oldest</option>
                 <option value="username_asc">Username A-Z</option>
                 <option value="username_desc">Username Z-A</option>
                 <option value="number_of_assets_asc">Most Assets</option>
                 <option value="number_of_assets_desc">Least Assets</option>
-              </select>
+            </select>
+            <hr>
+            <p class="text-muted mb-1 mt-2">Search:</p>
+            <div class="d-inline-flex">
+                <input type="text" class="form-control" style="width: 350px;" placeholder="Search by username/name/surname/country..."
+                    [(ngModel)]="filterText"><button class="ms-1 btn btn-primary" (click)="changeTextQuery()"><i
+                        class="bi bi-search"></i></button>
+                <br>
+            </div>
+
         </div>
     </div>
 </div>

@@ -60,13 +60,24 @@ export class AssetSortFilterComponent implements OnChanges {
   }
 
   changeTextQuery() {
-    this.router.navigate(['.'], { relativeTo: this.route,
-      queryParams: 
-      {  
-        filterByText: this.filterText
-      },
-      queryParamsHandling: 'merge'
-    });
+    if(this.filterText != ""){
+      this.router.navigate(['.'], { relativeTo: this.route,
+        queryParams: 
+        {  
+          filterByText: this.filterText
+        },
+        queryParamsHandling: 'merge'
+      });
+    } else {
+      this.router.navigate(['.'], { relativeTo: this.route,
+        queryParams: 
+        {  
+          filterByText: null
+        },
+        queryParamsHandling: 'merge'
+      });
+    }
+    
   }
 
 

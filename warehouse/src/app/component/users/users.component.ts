@@ -22,12 +22,7 @@ export class UsersComponent implements OnInit {
 
     this.route.queryParams.subscribe((queryParams:any) => {
 
-      if(queryParams.sortBy)
-        this.sortByParam = queryParams.sortBy;
-      else
-        this.sortByParam = "username_asc"
-
-      this.userService.getAllActiveUsers(this.sortByParam).subscribe({
+      this.userService.getAllUsers(queryParams, false).subscribe({
         next: (loadedUsers: User[]) => 
         {
           this.users = loadedUsers

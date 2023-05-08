@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { environment } from 'src/environments/environment.development';
 import { HelperService } from './helper.service';
@@ -13,6 +13,9 @@ export class UserService {
     private http: HttpClient, 
     private helperService: HelperService) { }
 
+    sortDirection: string = 'ASC'
+    sortBy: string = 'joinDate'
+
   public createUser(user: any): Observable<any>{
     return this.http.post(environment.baseUrlUserService, user);
   }
@@ -25,15 +28,23 @@ export class UserService {
     return this.http.put(environment.baseUrlVerifTokenService + "/verify/" + tokenId, null);
   }
 
-  public getAllUsersAdmin(): Observable<any>{
-    return this.http.get(environment.baseUrlUserService);
+  public getAllUsers(query: any, isAdmin: boolean): Observable<any>{
+
+    if(query.sortBy) {
+      this.sortDirection = this.helperService.getSortingDirection(query.sortBy)
+      this.sortBy = this.helperService.camelize(query.sortBy)
+    }
+
+    let params = new HttpParams();
+    params = params.append("sortBy", this.sortBy).append("sortDirection", this.sortDirection)
+    if(query.filterByText) params = params.append("filterByText", query.filterByText) 
+
+    if(isAdmin)
+      return this.http.get(environment.baseUrlUserService + "/admin", {params});
+    else
+    return this.http.get(environment.baseUrlUserService, {params});
   }
 
-  public getAllActiveUsers(sort: string): Observable<any>{
-    
-    let params = this.helperService.getQueryParams(sort)
-    return this.http.get(environment.baseUrlUserService + "/enabled", {params});
-  }
 
   public updateUser(formData: any): Observable<any>{
     return this.http.put(environment.baseUrlUserService, formData);

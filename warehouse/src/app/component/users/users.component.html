@@ -2,36 +2,33 @@
     <div *ngIf="loaded" style="background-color: rgb(32, 32, 32); margin-bottom: 5px; padding: 5px ;height: 3rem;">
         <div class="d-flex align-items-end text-left">
             <h4> <i class="bi bi-bar-chart-fill text-primary me-2"></i> </h4>
-            <h4 class="text-muted"> Total number: {{users.length}} </h4>
+            <h4 *ngIf="users.length == 1" class="text-muted"> {{users.length}} member </h4>
+            <h4 *ngIf="users.length != 1" class="text-muted"> {{users.length}} members </h4>
         </div>
     </div>
+    <app-user-sort-filter></app-user-sort-filter>
     <hr>
     <div class="row">
-        <div class="col-3">
-            <app-user-sort-filter></app-user-sort-filter>
-        </div>
-        <div class="col-9 ">
-            <div *ngIf="loaded else notLoaded" class="card-grid">
-                <a *ngFor="let user of users; index as i" class="card" href="http://localhost:4200/user/{{user.id}}" 
-                style="background-color: rgb(32, 32, 32); max-width: 290px; margin-bottom: 10px; color: white; text-decoration: none;">
-                    <div class="card-body">
-                        <div class=" flex-column align-items-left text-center">
-                            <img src="{{user.avatar.split('src\\')[1]}}" alt="profile_pic" class="rounded-circle" style="object-fit:cover" width="180"  height="180">       
-                        </div>
-                        <hr>
-                        <div class="flex-column text-center mb-1" style="margin: auto">  
-                            <p class="text-info">{{user.username}}</p> <span *ngIf="user.role == 'ADMIN' "class="text-muted"> (Superuser) </span>
-                        </div>
-                        <div class="flex-column text-center" style="margin: auto;">  
-                            <p *ngIf="user.numberOfAssets == 1" class="text-muted"><i class="bi bi-archive-fill me-1"></i> {{user.numberOfAssets}} asset</p> 
-                            <p *ngIf="user.numberOfAssets != 1" class="text-muted"><i class="bi bi-archive-fill me-1"></i> {{user.numberOfAssets}} assets</p> 
-                        </div>
+        <div *ngIf="loaded else notLoaded" class="card-grid">
+            <a *ngFor="let user of users; index as i" class="card" href="http://localhost:4200/user/{{user.id}}" 
+            style="background-color: rgb(32, 32, 32); max-width: 290px; margin-bottom: 10px; color: white; text-decoration: none;">
+                <div class="card-body">
+                    <div class=" flex-column align-items-left text-center">
+                        <img src="{{user.avatar.split('src\\')[1]}}" alt="profile_pic" class="rounded-circle" style="object-fit:cover" width="180"  height="180">       
                     </div>
-                </a>
-            </div>
-            <ng-template #notLoaded>
-                <h6 class="text-info"> <i class="bi bi-arrow-clockwise"></i> Loading...</h6>
-            </ng-template>
+                    <hr>
+                    <div class="flex-column text-center mb-1" style="margin: auto">  
+                        <p class="text-info">{{user.username}}</p> <span *ngIf="user.role == 'ADMIN' "class="text-muted"> (Superuser) </span>
+                    </div>
+                    <div class="flex-column text-center" style="margin: auto;">  
+                        <p *ngIf="user.numberOfAssets == 1" class="text-muted"><i class="bi bi-archive-fill me-1"></i> {{user.numberOfAssets}} asset</p> 
+                        <p *ngIf="user.numberOfAssets != 1" class="text-muted"><i class="bi bi-archive-fill me-1"></i> {{user.numberOfAssets}} assets</p> 
+                    </div>
+                </div>
+            </a>
         </div>
+        <ng-template #notLoaded>
+            <h6 class="text-info"> <i class="bi bi-arrow-clockwise"></i> Loading...</h6>
+        </ng-template>
     </div>
 </div>
