@@ -46,7 +46,7 @@
 
           <div *ngIf="loadAssets" class="row justify-content-between">
             <div class="col-3">
-              <app-asset-sort-filter></app-asset-sort-filter>
+              <app-asset-sort-filter [id]="id" [assetType]="assetType"></app-asset-sort-filter>
             </div>
             <div class="col-9">
               <app-assets-list [id]="id" [assetType]="assetType"></app-assets-list>

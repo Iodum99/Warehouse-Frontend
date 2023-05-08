@@ -33,7 +33,7 @@ export class UsersComponent implements OnInit {
           this.users = loadedUsers
           this.loaded = true
         },
-        error: () => {}
+        error:(error) => {alert(error.error.message)}
       }) 
      });  
   }

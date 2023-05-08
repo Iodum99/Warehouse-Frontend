@@ -46,7 +46,7 @@ export class AssetsListComponent implements OnChanges {
         console.log(this.assets)
 
       },
-      error: () => {}
+      error:(error) => {alert(error.error.message)}
     }) 
      })
 

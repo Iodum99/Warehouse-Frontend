@@ -20,28 +20,25 @@ export class AssetSortFilterComponent implements OnChanges {
 
     routeSub: Subscription = new Subscription;
     @Input() assetType?: string = ""
+    @Input() id?: number = 0
     filterText: string = ""
     tags: string[] = []
     extensions: string[] = []
     
     selectedExtensions: string[] = []
+    selectedTags: string[] = []
 
     ngOnChanges(): void {
       this.route.queryParams.subscribe((queryParams:any) => { 
-        console.log("On change Extensions:")
-        console.log(this.selectedExtensions)
-        
         if(queryParams.filterByText) this.filterText = queryParams.filterByText
         
-       
-        this.assetService.getExtensionsAndTags(this.assetType).subscribe({
+        this.assetService.getExtensionsAndTags(this.assetType, this.id).subscribe({
           next:(data: FilterData) => 
           {
             this.tags = data.tags
             this.extensions = data.extensions
-            console.log(data)
           },
-          error:() => {}
+          error:(error) => {alert(error.error.message)}
 
           })
       })
@@ -72,15 +69,6 @@ export class AssetSortFilterComponent implements OnChanges {
     });
   }
 
-  changeTagQuery(event: any) {
-    this.router.navigate(['.'], { relativeTo: this.route, 
-      queryParams: 
-      {  
-        filterByTags: event.target.value
-      },
-      queryParamsHandling: 'merge'
-    });
-  }
 
   changeExtensionQuery(event: any, extension: string) {
     if(event.target.checked){
@@ -99,6 +87,29 @@ export class AssetSortFilterComponent implements OnChanges {
         queryParams: 
         {  
           filterByExtensions: this.selectedExtensions
+        },
+        queryParamsHandling: 'merge'
+      });
+    }
+  }
+
+  changeTagQuery(event: any, tag: string) {
+    if(event.target.checked){
+      this.selectedTags.push(tag)
+      this.router.navigate(['.'], { relativeTo: this.route, 
+        queryParams: 
+        {  
+          filterByTags: this.selectedTags
+        },
+        queryParamsHandling: 'merge',
+      });
+    } else {
+      var index = this.selectedTags.indexOf(tag)
+      this.selectedTags.splice(index,1)
+      this.router.navigate(['.'], { relativeTo: this.route, 
+        queryParams: 
+        {  
+          filterByTags: this.selectedTags
         },
         queryParamsHandling: 'merge'
       });

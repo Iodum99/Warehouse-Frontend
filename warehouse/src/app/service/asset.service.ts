@@ -11,8 +11,6 @@ export class AssetService {
 
   constructor(private http: HttpClient, private helperService: HelperService) { }
 
-
-
   public getAssets(authorId: any, type: any, query: any): Observable<any>{
     
     var sortDirection = 'DESC'
@@ -24,18 +22,16 @@ export class AssetService {
     }
     
     let params = new HttpParams();
-      params = params.append('type', type).append("sortBy", sortBy).append("sortDirection", sortDirection)
+    params = params.append('type', type).append("sortBy", sortBy).append("sortDirection", sortDirection)
     if(query.filterByText) params = params.append("filterByText", query.filterByText) 
-    if(query.filterByTags) params = params.append("filterByTags", query.filterByTags)
     if(query.filterByExtensions) params = params.append("filterByExtensions", query.filterByExtensions)
+    if(query.filterByTags) params = params.append("filterByTags", query.filterByTags)
+    if(authorId != 0) params = params.append("userId", authorId); else params = params.append("userId", 0)
       
     console.log("EXTENSIONS:")
     console.log(query.filterByExtensions)
     
-    if(authorId != 0)
-      return this.http.get(environment.baseUrlAssetService + "/user/" + authorId + "/type/" + type, {params});
-    else
-      return this.http.get(environment.baseUrlAssetService + "/type", {params} );
+    return this.http.get(environment.baseUrlAssetService, {params} );
   }
 
   public getAssetById(id: number): Observable<any>{
@@ -66,8 +62,9 @@ export class AssetService {
     return this.http.delete(environment.baseUrlAssetService + "/" + id)
   }
 
-  public getExtensionsAndTags(type: any): Observable<any>{
-    return this.http.get(environment.baseUrlAssetService + "/filterdata/" + type)
+  public getExtensionsAndTags(type: any, id: any): Observable<any>{
+    if(id != 0) return this.http.get(environment.baseUrlAssetService + "/filterdata/" + type + "/user/" + id)
+    else return this.http.get(environment.baseUrlAssetService + "/filterdata/" + type)
   }
 
 }
