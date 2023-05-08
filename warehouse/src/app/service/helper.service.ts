@@ -23,4 +23,19 @@ import { HttpParams } from "@angular/common/http";
       return params;
                 
     }
+
+    public getSortingDirection(sortBy: string): string{
+      if(sortBy.includes("asc")) return "ASC"
+      else return "DESC"
+    
+  }
+
+    public camelize(str: String): string{
+        
+      if(str.includes('_asc')) str = str.replace('_asc', '')  
+        else str = str.replace('_desc', '')
+        
+      return str.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase()); 
+    }
+
 }

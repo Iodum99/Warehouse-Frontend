@@ -25,7 +25,7 @@ export class AssetsComponent implements OnInit {
     })
   }
 
-  gOnDestroy() {
+  ngOnDestroy() {
     this.routeSub.unsubscribe();
   }
 

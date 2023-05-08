@@ -20,23 +20,16 @@ export class AssetsListComponent implements OnChanges {
   assetsExist?: boolean
   public numberOfItems: number = 0
   loaded: boolean = false
-  soryByParam: string = ""
-
+  
   @Input() id?: number = 0
   @Input() assetType?: string = ""
   
   ngOnChanges(): void {
 
     this.route.queryParams.subscribe((queryParams:any) => {
-      
-      if(queryParams.sortBy)
-        this.soryByParam = queryParams.sortBy;
-      else
-        this.soryByParam = "upload_date_desc"
 
-      //Load Assets
       console.log("Sending request to fetch assets...")
-      this.assetService.getAssets(this.id, this.assetType, this.soryByParam).subscribe({
+      this.assetService.getAssets(this.id, this.assetType, queryParams).subscribe({
       next: (loadedAssets: Asset[]) => 
       {
         console.log("Got Assets!")
@@ -55,7 +48,7 @@ export class AssetsListComponent implements OnChanges {
       },
       error: () => {}
     }) 
-     });
+     })
 
       
   }
@@ -66,5 +59,6 @@ export class AssetsListComponent implements OnChanges {
     else
       return this.assets[index].description
   }
+  
   
 }

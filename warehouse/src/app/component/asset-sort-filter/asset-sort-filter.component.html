@@ -1,19 +1,53 @@
 <div>
-    <div class="card" style="background-color: rgb(32,32,32);">
-        <div class="card-body">
-            <h6 class="text-warning">TODO: Filtering</h6>
-            <br>
-            <select class="form-select" (change)="changeQuery($event)" aria-label="Default select example">
-                <option selected class="text-muted">-- Sort by --</option>
-                <option value="upload_date_desc">Upload Date Newest</option>
-                <option value="upload_date_asc">Upload Date Oldest</option>
-                <option value="name_asc">Name A-Z</option>
-                <option value="name_desc">Name Z-A</option>
-                <option value="downloads_asc">Least Downloads</option>
-                <option value="downloads_desc">Most Downloads</option>
-                <option value="downloads_asc">Least Likes</option>
-                <option value="downloads_desc">Most Likes</option>
-              </select>
+  <div class="card" style="background-color: rgb(32,32,32);">
+    <div class="card-body">
+      <br>
+      <p class="text-muted mb-1">Sort:</p>
+      <select class="form-select" (change)="changeSortQuery($event)" aria-label="Default select example">
+        <option value="upload_date_desc">Upload Date Newest</option>
+        <option value="upload_date_asc">Upload Date Oldest</option>
+        <option value="name_asc">Name A-Z</option>
+        <option value="name_desc">Name Z-A</option>
+        <option value="downloads_asc">Least Downloads</option>
+        <option value="downloads_desc">Most Downloads</option>
+        <option value="downloads_asc">Least Likes</option>
+        <option value="downloads_desc">Most Likes</option>
+      </select>
+      
+      <p class="text-muted mb-1 mt-2">Search:</p>
+      <div class="d-inline-flex">
+        <input type="text" class="form-control" placeholder="Serach by name or description..."
+          [(ngModel)]="filterText"><button class="ms-1 btn btn-primary" (click)="changeTextQuery()"><i
+            class="bi bi-search"></i></button>
+          <br>
+      </div>
+
+      <div *ngIf="extensions.length > 0" class="">
+        <hr>
+        <p class="text-muted"> Extensions: </p>
+      <div class="form-check">
+        <div *ngFor="let extension of extensions">
+          <input class="form-check-input mt-2" type="checkbox" [value]="extension" id="flexCheckDefault" (change)="changeExtensionQuery($event, extension)">
+        <label class="form-check-label text-muted mt-2" for="flexCheckDefault">
+          {{extension}}
+        </label>
         </div>
+      </div>
+      </div>
+      
+      <div *ngIf="tags.length > 0" class="">
+        <hr>
+        <p class="text-muted"> Tags: </p>
+      <div class="form-check">
+        <div *ngFor="let tag of tags">
+          <input class="form-check-input mt-2" type="checkbox" [value]="tag" id="flexCheckDefault">
+        <label class="form-check-label text-muted mt-2" for="flexCheckDefault">
+          {{tag}}
+        </label>
+        </div>
+      </div>
+      </div>
+
     </div>
+  </div>
 </div>
