@@ -67,4 +67,13 @@ export class AssetService {
     else return this.http.get(environment.baseUrlAssetService + "/filterdata/" + type)
   }
 
+  public getPopularAssets(): Observable<any>{
+    return this.http.get(environment.baseUrlAssetService + "/popular")
+  }
+
+  public getRecentAssets(): Observable<any>{
+    return this.http.get(environment.baseUrlAssetService + "/recent")
+  }
+
+
 }
