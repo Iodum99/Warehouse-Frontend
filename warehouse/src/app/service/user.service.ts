@@ -14,7 +14,7 @@ export class UserService {
     private helperService: HelperService) { }
 
     sortDirection: string = 'ASC'
-    sortBy: string = 'joinDate'
+    sortBy: string = 'username'
 
   public createUser(user: any): Observable<any>{
     return this.http.post(environment.baseUrlUserService, user);

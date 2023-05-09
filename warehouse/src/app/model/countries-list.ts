@@ -156,7 +156,7 @@ export var countries: Country [] = [
     { code: "NA", code3: "NAM", name: "Namibia", number: "516" },
     { code: "NR", code3: "NRU", name: "Nauru", number: "520" },
     { code: "NP", code3: "NPL", name: "Nepal", number: "524" },
-    { code: "NL", code3: "NLD", name: "Netherlands (the)", number: "528" },
+    { code: "NL", code3: "NLD", name: "The Netherlands", number: "528" },
     { code: "NC", code3: "NCL", name: "New Caledonia", number: "540" },
     { code: "NZ", code3: "NZL", name: "New Zealand", number: "554" },
     { code: "NI", code3: "NIC", name: "Nicaragua", number: "558" },
