@@ -30,8 +30,8 @@
                 <td>{{user.country}}</td>
                 <td>{{user.enabled}}</td>
                 <td>{{user.suspended}} 
-                    <button *ngIf="!user.suspended" class="ms-2 btn btn-sm btn-warning" (click)="suspendUser(user.id, user.username)">Suspend</button>
-                    <button *ngIf="user.suspended"class="ms-2 btn btn-sm btn-primary" (click)="activateUser(user.id, user.username)">Activate</button>
+                    <button *ngIf="!user.suspended && user.role != 'ADMIN'" class="ms-2 btn btn-sm btn-warning" (click)="suspendUser(user.id, user.username)">Suspend</button>
+                    <button *ngIf=" user.suspended "class="ms-2 btn btn-sm btn-primary" (click)="activateUser(user.id, user.username)">Activate</button>
                 </td>
             </tr>
             </tbody>
