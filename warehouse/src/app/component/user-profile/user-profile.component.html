@@ -17,8 +17,8 @@
                             <img src="{{avatarSource}}" alt="profile_pic" class="rounded-circle" style="object-fit:cover" width="200"  height="200">       
                         </div>
                         <div class=" flex-column align-items-left text-left" style="margin: 10px;">
-                            <p *ngIf="user?.country != null" class="text-muted font-size-sm">Country: {{user?.country}} </p>
-                            <p *ngIf="user?.joinDate != null" class="text-muted font-size-sm">Joined: {{user?.joinDate}} </p>
+                            <p *ngIf="user?.country" class="text-muted font-size-sm">Country: {{user?.country}} </p>
+                            <p  class="text-muted font-size-sm">Joined: {{user?.joinDate}} </p>
                         </div>
                         <div class=" flex-column align-items-left text-center" *ngIf="canEdit">
                             <hr>

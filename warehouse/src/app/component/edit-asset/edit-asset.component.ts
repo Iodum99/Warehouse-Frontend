@@ -113,7 +113,8 @@ export class EditAssetComponent implements OnInit {
         userIdLikes: this.asset.userIdLikes,
         downloads: this.asset.downloads,
         lastModifiedDate: this.asset.lastModifiedDate,
-        extensions: this.asset.extensions
+        extensions: this.asset.extensions,
+        size: this.asset.size
       }
       console.log(asset)
 
@@ -132,11 +133,11 @@ export class EditAssetComponent implements OnInit {
         next:(response) => 
         { 
          alertify.notify("File Successfully Updated!", "", 5)
-         this.router.navigate(['/asset/' + this.asset.id])
+         window.location.href="http://localhost:4200/asset/" + this.asset.id
         },
-        error:(error) => {
+        error:(response) => {
   
-          alertify.error(error.error.message)
+          alertify.error(response.error.message)
         }
       })
     }

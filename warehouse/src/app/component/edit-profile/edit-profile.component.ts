@@ -59,7 +59,7 @@ export class EditProfileComponent implements OnInit {
         this.email = loadedUser.email
         this.name = loadedUser.name
         this.surname = loadedUser.surname
-        this.selectedCountry = loadedUser.country
+        if(loadedUser.country) this.selectedCountry = loadedUser.country
         this.biography = loadedUser.biography
         this.interests = loadedUser.interests  
         this.avatarSource = loadedUser.avatar.split('src\\')[1]

@@ -105,9 +105,9 @@
                                 style="color: red; ">Invalid input
                             </span>
                         </div>
-                        <div class="d-inline-flex">
-                            <select (change)="changeType($event)" [(ngModel)]="selectedCountry" [ngModelOptions]="{standalone: true}" class="form-control mt-3" name="country" id="country">
-                                <option value="" disabled>Select Country</option>
+                        <div class="d-inline mt-2">
+                            <span class="text-muted"> Country: </span>
+                            <select (change)="changeType($event)" [(ngModel)]="selectedCountry" [ngModelOptions]="{standalone: true}" class="form-control mt-1" name="country" id="country">
                                 <option value=""> Not Specified</option>
                                 <option *ngFor="let country of countries" [value]="country.name">{{country.name}}</option>
                            </select>
