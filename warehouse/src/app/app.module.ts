@@ -24,6 +24,7 @@ import { EditProfileComponent } from './component/edit-profile/edit-profile.comp
 import { AuthInterceptorProvider } from './authentication/auth.interceptor';
 import { AssetSortFilterComponent } from './component/asset-sort-filter/asset-sort-filter.component';
 import { UserSortFilterComponent } from './component/user-sort-filter/user-sort-filter.component';
+import { AdminUserTableComponent } from './component/admin-user-table/admin-user-table.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { UserSortFilterComponent } from './component/user-sort-filter/user-sort-
     UsersComponent,
     EditProfileComponent,
     AssetSortFilterComponent,
-    UserSortFilterComponent
+    UserSortFilterComponent,
+    AdminUserTableComponent
   ],
   imports: [
     BrowserModule,

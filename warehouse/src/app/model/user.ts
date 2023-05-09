@@ -11,5 +11,7 @@ export interface User{
     role: String,
     joinDate: Date
     numberOfAssets: number
+    suspended: boolean
+    enabled: boolean
 
 }

@@ -11,7 +11,7 @@
           <button class="nav-link" id="pills-user-assets-tab" data-bs-toggle="pill" data-bs-target="#user-assets"
             type="button" role="tab" aria-controls="pills-assets" aria-selected="false">Assets</button>
         </li>
-        <li class="nav-item ms-auto" role="presentation">
+        <li *ngIf="authService.isLoggedIn$ | async" class="nav-item ms-auto" role="presentation">
           <button class="nav-link" id="pills-user-favorite-assets-tab" data-bs-toggle="pill"
             data-bs-target="#user-favorite-assets" type="button" role="tab" aria-controls="pills-assets"
             aria-selected="false">Favorites</button>

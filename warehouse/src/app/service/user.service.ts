@@ -49,4 +49,8 @@ export class UserService {
   public updateUser(formData: any): Observable<any>{
     return this.http.put(environment.baseUrlUserService, formData);
   }
+
+  public toggleSuspension(userId: number): Observable<any>{
+    return this.http.put(environment.baseUrlUserService + "/status/" + userId, null);
+  }
 }

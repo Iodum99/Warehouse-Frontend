@@ -4,6 +4,7 @@
             <div class="  align-items-left text-left">
                 <h3 class="text-info"> <strong> {{user?.username}}</strong></h3>
                 <h4 *ngIf="isAdmin" style="margin-left: 5px;" class="text-muted font-size-sm">(Admin)</h4>
+                <h4 *ngIf="user?.suspended" class="text-danger font-size-sm">(Suspended)</h4>
                 <p class="font-size-md"> <strong> {{user?.name}} {{user?.surname}} </strong></p>
             </div>
         </div>

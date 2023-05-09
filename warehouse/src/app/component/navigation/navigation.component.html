@@ -26,7 +26,10 @@
               </li>
             </ul>
             <div class="d-flex ms-auto align-items-center">
-              <ul class="navbar-nav me-auto">
+              <ul class="navbar-nav me-auto"> 
+                <li *ngIf="authService.loggedUser?.role == 'ADMIN'" class="nav-item me-auto">
+                  <a class="nav-link" routerLink="/admin/users"><i class="bi bi-gear-fill text-warning me-1" style="font-size: 25px;"> </i>Manage Users</a>
+                </li>
                 <li *ngIf="authService.isLoggedIn$ | async" class="nav-item me-auto">
                   <a class="nav-link" routerLink="/user/{{authService.loggedUser?.id}}/asset/add"><i class="bi bi-plus-square-fill me-1" style="font-size: 25px;"> </i>Add New Asset</a>
                 </li>
