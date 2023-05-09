@@ -36,7 +36,7 @@
                 </div>
             </div>
             <span *ngIf="invalid"> 
-                <p style="color: red"> <i class="bi bi-exclamation-circle" style="color: red;"></i> Invalid username or password</p>
+                <p style="color: red"> <i class="bi bi-exclamation-circle" style="color: red;"></i> {{error}}</p>
             </span>
             <div class="d-grid">
                 <button type="submit" class="btn btn-primary btn-sm" style="width: auto;">Log In</button>

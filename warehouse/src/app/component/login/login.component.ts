@@ -19,6 +19,7 @@ export class LoginComponent {
   password?: string;
   submitted: boolean = false
   invalid: boolean = false
+  error: string = ""
 
   loginForm = new FormGroup({
     username: new FormControl('', [Validators.required]),
@@ -37,8 +38,12 @@ export class LoginComponent {
       console.log(loginData);
       this.authService.login(loginData).subscribe(
         {
-          error: () => 
+          error: (response) => 
           { 
+            if(response.error.message == "LOCKED" || response.error.message == "BAD_CREDENTIALS" || response.error.message == "DISABLED") 
+              this.error = response.error.description
+           else
+            this.error = "Internal Error"
             this.invalid = true
             
           },
