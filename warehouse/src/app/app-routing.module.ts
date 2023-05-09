@@ -12,6 +12,9 @@ import { EditAssetComponent } from './component/edit-asset/edit-asset.component'
 import { UsersComponent } from './component/users/users.component';
 import { EditProfileComponent } from './component/edit-profile/edit-profile.component';
 import { AdminUserTableComponent } from './component/admin-user-table/admin-user-table.component';
+import { authGuard } from './authentication/logged-in.guard';
+import { NoAccessPageComponent } from './component/no-access-page/no-access-page.component';
+import { hasRoleGuard } from './authentication/has-role.guard';
 
 const routes: Routes = [
   {
@@ -44,11 +47,13 @@ const routes: Routes = [
   },
   {
     path: "user/:id/asset/add",
-    component: AddAssetComponent
+    component: AddAssetComponent,
+    canActivate: [authGuard]
   },
   {
     path: "asset/:id/edit",
-    component: EditAssetComponent
+    component: EditAssetComponent,
+    canActivate: [authGuard]
   },
   {
     path: "users/all",
@@ -56,11 +61,18 @@ const routes: Routes = [
   },
   {
     path: "user/:id/edit",
-    component: EditProfileComponent
+    component: EditProfileComponent,
+    canActivate: [authGuard]
   },
   {
     path: "admin/users",
-    component: AdminUserTableComponent
+    component: AdminUserTableComponent,
+    canActivate: [authGuard, hasRoleGuard],
+    data: {role: 'ADMIN'}
+  },
+  {
+    path: "access/forbidden",
+    component: NoAccessPageComponent
   }
 ];
 
