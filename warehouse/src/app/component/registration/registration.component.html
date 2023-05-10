@@ -1,6 +1,6 @@
-<div>
+<div class="main-container">
     <div *ngIf="registrationSuccess else registration">
-        <div class="confirmation-container ">
+        <div class="col-5 mx-auto mt-2" style="background-color: rgb(32, 32, 32);">
             <div class="d-flex justify-content-center">
                 <i class="bi bi-envelope-paper-heart-fill" style="color: rgb(0, 188, 140); font-size: 70px;"></i>
             </div>
@@ -21,9 +21,10 @@
         </div>
     </div>
     <ng-template #registration>
-        <div class="signup-form registration-container">
+        <div class="signup-form">
+           <div class="col-3 mx-auto mt-2" style="background-color: rgb(32, 32, 32);">
             <form [formGroup]="registrationForm" (ngSubmit)="register()">
-                <h2 class="form-group d-flex justify-content-center">Registration</h2>
+                <h2 class="form-group text-center">Registration</h2>
                 <hr>
                 <div class="form-group" style="margin-bottom: 10px;">
                     <div class="input-group">
@@ -93,6 +94,7 @@
                     <button type="submit" class="btn btn-primary btn-sm" style="width: auto;">Register</button>
                 </div>
             </form>
+           </div>
         </div>
     </ng-template>
 </div>

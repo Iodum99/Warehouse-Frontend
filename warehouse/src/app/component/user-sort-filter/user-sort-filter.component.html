@@ -1,7 +1,7 @@
 <div>
     <div class="card" style="background-color: rgb(32,32,32);">
         <div class="card-body">
-            <select class="form-select" (change)="changeQuery($event)" aria-label="Default select example">
+            <select class="form-select" style="width:350px" (change)="changeQuery($event)" aria-label="Default select example">
                 <option selected disabled class="text-muted">-- Sort by --</option>
                 <option value="join_date_desc">Join Date Newest</option>
                 <option value="join_date_asc">Join Date Oldest</option>
@@ -18,7 +18,6 @@
                         class="bi bi-search"></i></button>
                 <br>
             </div>
-
         </div>
     </div>
 </div>

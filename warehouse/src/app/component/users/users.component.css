@@ -11,3 +11,12 @@
     grid-gap: 1rem; /* 3 */
     justify-content: space-between; /* 4 */
   }
+
+.card {
+    transition: transform 0.2s ease;
+  }
+
+.card:hover {
+    transform: scale(1.05);
+  }
+  
