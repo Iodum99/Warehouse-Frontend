@@ -49,12 +49,14 @@ const routes: Routes = [
   {
     path: "user/:id/asset/add",
     component: AddAssetComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
+    canDeactivate: [pendingChangesGuard]
   },
   {
     path: "asset/:id/edit",
     component: EditAssetComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
+    canDeactivate: [pendingChangesGuard]
   },
   {
     path: "users/all",

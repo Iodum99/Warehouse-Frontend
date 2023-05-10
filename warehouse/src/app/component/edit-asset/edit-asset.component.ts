@@ -1,24 +1,30 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 import { Asset } from 'src/app/model/asset';
 import { AssetService } from 'src/app/service/asset.service';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { AssetType } from 'src/app/model/asset-type';
 import * as alertify from 'alertifyjs'
+import { ComponentCanDeactivate } from 'src/app/guard/pending-changes-guard';
 
 @Component({
   selector: 'app-edit-asset',
   templateUrl: './edit-asset.component.html',
   styleUrls: ['./edit-asset.component.css']
 })
-export class EditAssetComponent implements OnInit {
+export class EditAssetComponent implements OnInit, ComponentCanDeactivate {
 
   constructor(
     private assetService: AssetService,
     public authService: AuthenticationService,
-    private route: ActivatedRoute,
-    private router: Router){}
+    private route: ActivatedRoute){}
+
+    @HostListener('window:beforeunload')
+    canDeactivate(): Observable<boolean> | boolean {
+      if(this.complete) return true 
+      else return this.checkIfEdited()
+    }
 
     routeSub: Subscription = new Subscription;
     asset: Asset = new Asset()
@@ -28,7 +34,6 @@ export class EditAssetComponent implements OnInit {
     tags: string[] = []
     newTag: string = ""
     nameError: string = ""
-
     file: any
     image: any
     gallery: File[] = []
@@ -38,6 +43,7 @@ export class EditAssetComponent implements OnInit {
     counter: number = 0
   
     types = AssetType;
+    complete: boolean = false
   
     ngOnInit(): void {
       this.routeSub = this.route.params.subscribe(params => {
@@ -93,12 +99,10 @@ export class EditAssetComponent implements OnInit {
   }
 
   update(): void{
-
     this.validate()
-  
+
     if(this.assetName != "") {
-      var asset = {
-        
+      var asset = {  
         id: this.asset.id,
         userId: this.authService.loggedUser?.id,
         author: this.asset.author,
@@ -115,8 +119,6 @@ export class EditAssetComponent implements OnInit {
         extensions: this.asset.extensions,
         size: this.asset.size
       }
-      console.log(asset)
-
       const formData: FormData = new FormData();
       formData.append('asset', new Blob([JSON.stringify(asset)],{type: "application/json"}))
       formData.append('file',  this.file)
@@ -132,6 +134,7 @@ export class EditAssetComponent implements OnInit {
         next:() => 
         { 
          alertify.notify("File Successfully Updated!", "", 5)
+         this.complete = true
          window.location.href="http://localhost:4200/asset/" + this.asset.id
         },
         error:(response) => {
@@ -142,12 +145,10 @@ export class EditAssetComponent implements OnInit {
     }
   }
 
-  validate(){
-    
+  validate(){   
     if(this.assetName == "") {
       this.nameError = "Please enter a name for this asset..."
-    }
-    
+    }   
   }
 
   addTag(newTag: string){
@@ -173,4 +174,21 @@ export class EditAssetComponent implements OnInit {
     this.nameError = ""
   }
 
+  checkIfEdited(): boolean{
+
+    console.log(this.image)
+    console.log(this.gallery)
+    console.log(this.assetName)
+    console.log(this.assetDescription)
+    console.log(this.tags)
+    console.log(this.file)
+
+    if(this.image
+      || this.gallery.length > 0
+      || this.assetName != this.asset.name 
+      || this.assetDescription != this.asset.description
+      || this.tags != this.asset.tags
+      || this.file != this.asset.filePath) return false
+    else return true
+  }
 }

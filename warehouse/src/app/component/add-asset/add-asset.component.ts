@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { User } from 'src/app/model/user';
 import { AssetService } from 'src/app/service/asset.service';
 import { AuthenticationService } from 'src/app/service/authentication.service';
@@ -6,18 +6,26 @@ import * as alertify from 'alertifyjs'
 import { Router } from '@angular/router';
 import { AssetType } from 'src/app/model/asset-type';
 import { Asset } from 'src/app/model/asset';
+import { ComponentCanDeactivate } from 'src/app/guard/pending-changes-guard';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-asset',
   templateUrl: './add-asset.component.html',
   styleUrls: ['./add-asset.component.css']
 })
-export class AddAssetComponent{
+export class AddAssetComponent implements ComponentCanDeactivate{
 
   constructor(
-    private authService: AuthenticationService,
+    public authService: AuthenticationService,
     private assetService: AssetService,
     private router: Router) { }
+  
+    @HostListener('window:beforeunload')
+    canDeactivate(): Observable<boolean> | boolean {
+      if(this.complete) return true 
+      else return this.checkIfEdited()
+    }
   
   id?: number
   user?: User
@@ -26,11 +34,11 @@ export class AddAssetComponent{
   assetType: string = ""
   tags: string[] = []
   newTag: string = ""
+  
   nameError: string = ""
   fileError: string = ""
   imageError: string = ""
   assetTypeError: string = ""
-  error: boolean = false
 
   file: any
   image: any
@@ -39,6 +47,10 @@ export class AddAssetComponent{
   imageSrc: string = ""
   gallerySrc: string[] = []
   counter: number = 0
+
+  changedImage: boolean = false
+  changedGallery: boolean = false
+  complete: boolean = false
 
   types = AssetType;
 
@@ -62,6 +74,7 @@ export class AddAssetComponent{
 
   onGalleryInput(gallery: FileList | null): void {
     if (gallery && gallery.length < 6 && this.gallery.length < 6) {
+        this.changedGallery = true
         this.counter = this.gallery.length
         for(let i=0; i<gallery.length; i++){
 
@@ -76,6 +89,7 @@ export class AddAssetComponent{
     } else {
       alertify.notify("You can select up to 5 pictures!", "", 5)
       this.gallery = []
+      this.changedGallery = false
     } 
   }
 
@@ -108,6 +122,7 @@ export class AddAssetComponent{
         next:(asset: Asset) => 
         { 
           alertify.success("File Successfully Uploaded!")
+          this.complete = true
           this.router.navigate(['/asset/' + asset.id])
         },
         error:(error) => {
@@ -163,6 +178,17 @@ export class AddAssetComponent{
     this.assetType = event.target.value
     if(this.assetType != "")
       this.assetTypeError = ""
+  }
+
+  checkIfEdited(): boolean{
+    if(this.changedImage 
+      || this.changedGallery 
+      || this.file != null 
+      || this.assetName != "" 
+      || this.assetDescription != ""
+      || this.tags.length > 0
+      || this.assetType != "") return false
+    else return true
   }
 
 }

@@ -74,6 +74,14 @@
                     </div>
                 </div>
             </div>
+            <div class="card mt-2" style="background-color: rgb(32, 32, 32);"> 
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <button class="btn btn-info" style="width: 500px" (click)="upload()">Upload</button>
+                        <button class="btn btn-info ms-2" routerLink="/user/{{authService.loggedUser?.id}}" style="width: 300px">Cancel</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-4">
             <div class="card" style="background-color: rgb(32, 32, 32);">
@@ -84,9 +92,6 @@
                     <hr>
                     <input class="form-control mt-2 mb-2" type="file" id="formFileMultiple" #fileInput
                         (change)="onFileInput(fileInput.files)" accept=".zip" />
-                        <div class="d-flex justify-content-left flex-column mx-auto  mt-3">
-                            <button class="btn btn-info" (click)="upload()">Upload</button>
-                        </div>
                 </div>
             </div>
         </div>
