@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { countries } from 'src/app/model/countries-list';
 import { User } from 'src/app/model/user';
@@ -6,18 +6,26 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
 import { UserService } from 'src/app/service/user.service';
 import * as alertify from 'alertifyjs'
 import { Router } from '@angular/router';
+import { ComponentCanDeactivate } from 'src/app/guard/pending-changes-guard';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.css']
 })
-export class EditProfileComponent implements OnInit {
+export class EditProfileComponent implements OnInit, ComponentCanDeactivate {
 
   constructor(
     private userService: UserService,
-    private authService: AuthenticationService,
+    public authService: AuthenticationService,
     private router: Router){}
+  
+    @HostListener('window:beforeunload')
+    canDeactivate(): Observable<boolean> | boolean {
+      if (this.complete) return true
+      else return this.checkIfEdited()
+    }
 
   user?: User
   newAvatar: any
@@ -36,7 +44,23 @@ export class EditProfileComponent implements OnInit {
   interests: string = ""
   selectedCountry: string = ""
 
-  
+  changedPicture: boolean = false
+  complete: boolean = false
+
+
+  checkIfEdited(): boolean {
+    
+    if(this.updateProfileForm.dirty 
+      || this.biography != this.user?.biography
+      || this.interests != this.user.interests
+      || this.name != this.user.name
+      || this.surname != this.user.surname
+      || this.changedPicture) return false
+
+      else return true
+  }
+
+
   public countries:any = countries
 
 
@@ -71,6 +95,7 @@ export class EditProfileComponent implements OnInit {
 
   onImageInput(images: FileList | null): void {
     if (images) {
+      this.changedPicture = true
       this.newAvatar = images.item(0)
       
       if(this.newAvatar != null)
@@ -108,6 +133,7 @@ export class EditProfileComponent implements OnInit {
       this.userService.updateUser(formData).subscribe({
         next:() => 
         { 
+          this.complete = true
           window.location.href="http://localhost:4200/user/" + this.authService.loggedUser?.id
         },
         error:(error) => {
@@ -115,7 +141,6 @@ export class EditProfileComponent implements OnInit {
         }
       })
     }
-    
   }
 
   changeType(event: any){

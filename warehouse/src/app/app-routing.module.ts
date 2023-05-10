@@ -12,9 +12,10 @@ import { EditAssetComponent } from './component/edit-asset/edit-asset.component'
 import { UsersComponent } from './component/users/users.component';
 import { EditProfileComponent } from './component/edit-profile/edit-profile.component';
 import { AdminUserTableComponent } from './component/admin-user-table/admin-user-table.component';
-import { authGuard } from './authentication/logged-in.guard';
+import { authGuard } from './guard/logged-in.guard';
 import { NoAccessPageComponent } from './component/no-access-page/no-access-page.component';
-import { hasRoleGuard } from './authentication/has-role.guard';
+import { hasRoleGuard } from './guard/has-role.guard';
+import { pendingChangesGuard } from './guard/pending-changes-guard';
 
 const routes: Routes = [
   {
@@ -62,7 +63,8 @@ const routes: Routes = [
   {
     path: "user/:id/edit",
     component: EditProfileComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
+    canDeactivate: [pendingChangesGuard]
   },
   {
     path: "admin/users",

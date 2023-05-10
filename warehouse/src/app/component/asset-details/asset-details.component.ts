@@ -27,6 +27,7 @@ export class AssetDetailsComponent implements OnInit {
     liked: boolean = false
     assetFound: boolean = true
     fileSize: string = ""
+    images: string[] = []
 
     
   ngOnInit(): void {

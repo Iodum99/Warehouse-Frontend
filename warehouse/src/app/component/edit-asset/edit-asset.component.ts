@@ -69,8 +69,7 @@ export class EditAssetComponent implements OnInit {
       this.image = images.item(0)
       
       if(this.image != null)
-      this.imageSrc = URL.createObjectURL(this.image)
-      
+      this.imageSrc = URL.createObjectURL(this.image)   
     }
   }
 
@@ -130,7 +129,7 @@ export class EditAssetComponent implements OnInit {
       }
 
       this.assetService.updateAsset(formData).subscribe({
-        next:(response) => 
+        next:() => 
         { 
          alertify.notify("File Successfully Updated!", "", 5)
          window.location.href="http://localhost:4200/asset/" + this.asset.id

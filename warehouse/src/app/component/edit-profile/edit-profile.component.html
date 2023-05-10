@@ -127,10 +127,10 @@
                                 placeholder="Share your interests..." style="height: 110px;"></textarea>
                         </div>
                         <hr>
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary btn-sm"
-                                style="width: auto;">Update</button>
-                        </div>
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-primary btn-sm p-2" style="width: 500px;">Update</button>    
+                            <button routerLink="/user/{{this.authService.loggedUser?.id}}" class="btn btn-primary btn-sm ms-2" style="width: 200px;">Cancel</button>               
+                        </div>            
                     </div>
                 </div>
             </div>
