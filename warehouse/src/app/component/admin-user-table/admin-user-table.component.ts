@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, ActivationStart, Router } from '@angular/router';
 import { User } from 'src/app/model/user';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { UserService } from 'src/app/service/user.service';
@@ -25,6 +25,12 @@ export class AdminUserTableComponent implements OnInit {
   
   ngOnInit() {
     this.route.queryParams.subscribe((queryParams:any) => {
+
+      this.router.events.subscribe(data => {
+        if (data instanceof ActivationStart) {
+          console.log(`Custom data`, data.snapshot.data);
+        }
+      });
 
       var isAdmin;
       (this.authService.loggedUser?.role == "ADMIN")? isAdmin = true : isAdmin = false

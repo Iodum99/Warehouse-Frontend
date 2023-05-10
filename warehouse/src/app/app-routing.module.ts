@@ -67,8 +67,7 @@ const routes: Routes = [
   {
     path: "admin/users",
     component: AdminUserTableComponent,
-    canActivate: [authGuard, hasRoleGuard],
-    data: {role: 'ADMIN'}
+    canActivate: [authGuard, hasRoleGuard]
   },
   {
     path: "access/forbidden",

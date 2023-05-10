@@ -8,8 +8,7 @@ export const hasRoleGuard = () => {
     const router = inject(Router)
     const route = inject(ActivatedRoute)
 
-    const isAuthorized = authService.loggedUser?.role === route.snapshot.data["role"]
-
+    const isAuthorized = authService.loggedUser?.role === 'ADMIN'
     if(!isAuthorized){       
       router.navigate(['/access/forbidden'])
     }
