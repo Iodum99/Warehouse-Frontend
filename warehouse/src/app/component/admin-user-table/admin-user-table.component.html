@@ -19,6 +19,7 @@
                 <th scope="col">Country</th>
                 <th scope="col">Verified</th>
                 <th scope="col">Suspended</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -33,6 +34,7 @@
                     <button *ngIf="!user.suspended && user.role != 'ADMIN'" class="ms-2 btn btn-sm btn-warning" (click)="suspendUser(user.id, user.username)">Suspend</button>
                     <button *ngIf=" user.suspended "class="ms-2 btn btn-sm btn-primary" (click)="activateUser(user.id, user.username)">Activate</button>
                 </td>
+                <td><button *ngIf="user.role != 'ADMIN'" class="ms-2 btn btn-sm btn-danger" (click)="deleteUser(user.id, user.username)">Delete</button></td>
             </tr>
             </tbody>
           </table>

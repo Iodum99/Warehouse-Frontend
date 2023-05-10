@@ -69,6 +69,21 @@ export class AdminUserTableComponent implements OnInit {
     })
   }
 
+  deleteUser(index: number, username: string){
+    if(confirm("Are you sure you want to DELETE " + username +" ?")){
+
+      this.userService.deleteUser(index).subscribe({
+        next:() => {
+          
+          alertify.error("Deleted " + username)
+          this.redirectTo('/admin/users')
+        },
+        error: (response) => {alert(response.error.message)}
+      })
+
+    }
+  }
+
   redirectTo(uri:string){
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
     this.router.navigate([uri]));

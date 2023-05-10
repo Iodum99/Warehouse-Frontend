@@ -53,4 +53,8 @@ export class UserService {
   public toggleSuspension(userId: number): Observable<any>{
     return this.http.put(environment.baseUrlUserService + "/status/" + userId, null);
   }
+
+  public deleteUser(id: number): Observable<any>{
+    return this.http.delete(environment.baseUrlUserService + "/" + id);
+  }
 }
