@@ -1,6 +1,6 @@
 <div class="main-container">
     <div *ngIf="registrationSuccess else registration">
-        <div class="col-5 mx-auto mt-2" style="background-color: rgb(32, 32, 32);">
+        <div class="col-6 mx-auto mt-2" style="background-color: rgb(32, 32, 32);">
             <div class="d-flex justify-content-center">
                 <i class="bi bi-envelope-paper-heart-fill" style="color: rgb(0, 188, 140); font-size: 70px;"></i>
             </div>
@@ -22,7 +22,7 @@
     </div>
     <ng-template #registration>
         <div class="signup-form">
-           <div class="col-3 mx-auto mt-2" style="background-color: rgb(32, 32, 32);">
+           <div class="col-5 mx-auto mt-2" style="background-color: rgb(32, 32, 32);">
             <form [formGroup]="registrationForm" (ngSubmit)="register()">
                 <h2 class="form-group text-center">Registration</h2>
                 <hr>
