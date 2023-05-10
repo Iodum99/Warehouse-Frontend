@@ -52,7 +52,6 @@ export class EditAssetComponent implements OnInit, ComponentCanDeactivate {
           {
             this.asset = loadedAsset;
             console.log(this.asset)
-
             this.assetName = this.asset.name
             this.assetDescription = this.asset.description
             this.tags = this.asset.tags
@@ -72,8 +71,7 @@ export class EditAssetComponent implements OnInit, ComponentCanDeactivate {
 
   onImageInput(images: FileList | null): void {
     if (images) {
-      this.image = images.item(0)
-      
+      this.image = images.item(0)  
       if(this.image != null)
       this.imageSrc = URL.createObjectURL(this.image)   
     }
@@ -175,14 +173,6 @@ export class EditAssetComponent implements OnInit, ComponentCanDeactivate {
   }
 
   checkIfEdited(): boolean{
-
-    console.log(this.image)
-    console.log(this.gallery)
-    console.log(this.assetName)
-    console.log(this.assetDescription)
-    console.log(this.tags)
-    console.log(this.file)
-
     if(this.image
       || this.gallery.length > 0
       || this.assetName != this.asset.name 

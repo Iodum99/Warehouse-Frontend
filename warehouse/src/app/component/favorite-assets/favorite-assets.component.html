@@ -1,29 +1,31 @@
 <div class="main-container">
-    <div *ngIf="assetsExist else noAssets">
-        <div *ngFor="let asset of assets; index as i;" class="card"
-            style="background-color: rgb(32, 32, 32); max-width: 620px; margin-bottom: 5px;">
-            <div class="row d-flex align-items-center">
-                <div class="col-9">
-                    <a routerLink="/asset/{{asset.id}}"class="row d-flex align-items-center text-primary" style="padding: 10px;">
-                        <div class="col-6" >
-                            <img class="card-img-top" src="assets/user_id_{{asset.userId}}/asset_id_{{asset.id}}/main.jpg" alt="Card image cap"
-                            style="height: 100px;  object-fit:cover">     
-                        </div>
-                        <div class="col-6">
-                            <p style="font-size: 18px; color: white">{{asset.name}}</p> 
-                        </div>
-                    </a>
-                </div>
-                <div class="col-1 ms-auto align-items-end" style="color:azure">
-                    <i class="bi bi-heartbreak remove-like" (click)="removeLike(asset.id, i)"></i>
+    <div class="d-inline">
+        <div *ngIf="assetsExist else noAssets" class="card-grid">
+            <div *ngFor="let asset of assets; index as i;" class="card"
+                style="background-color: rgb(32, 32, 32); max-width: 600px; margin-bottom: 5px;">
+                <div class="row d-flex align-items-center">
+                    <div class="col-9">
+                        <a routerLink="/asset/{{asset.id}}"class="row d-flex align-items-center text-primary" style="padding: 10px;">
+                            <div class="col-6" >
+                                <img class="card-img-top" src="assets/user_id_{{asset.userId}}/asset_id_{{asset.id}}/main.jpg" alt="Card image cap"
+                                style="height: 150px;  object-fit:cover">     
+                            </div>
+                            <div class="col-6">
+                                <p style="font-size: 18px; color: white">{{asset.name}}</p> 
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-1 ms-auto align-items-end" style="color:azure">
+                        <i class="bi bi-heartbreak remove-like" style="font-size: 20px;" (click)="removeLike(asset.id, i)"></i>
+                    </div>
                 </div>
             </div>
         </div>
+        <ng-template #noAssets>
+            <div class="row">
+                <h3 class="text-info">No favorites yet...</h3>
+            </div>
+        </ng-template>
     </div>
-    <ng-template #noAssets>
-        <div class="row">
-            <h3 class="text-info">No favorites yet...</h3>
-        </div>
-    </ng-template>
 </div>
 

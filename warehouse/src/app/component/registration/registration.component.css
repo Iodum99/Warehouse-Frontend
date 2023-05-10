@@ -1,16 +1,7 @@
-.registration-container{
+.main-container{
     margin: 1rem auto;
-    padding: 1rem 1rem;
-    max-width: 40rem;
+    max-width: 80rem;
+    padding: 0 1rem;
     text-align: left;
-    background-color: rgb(31, 31, 31);
-}
-
-.confirmation-container{
-    margin: 1rem auto;
-    padding: 1rem 1rem;
-    max-width: 35rem;
-    text-align: left;
-    background-color: rgb(31, 31, 31);
 }
 

@@ -64,12 +64,17 @@ export class AssetDetailsComponent implements OnInit {
 
   getfileSizeString(size: number): string{
     var sizeString = ""
+    var calcSize = 0
     if ( size < 1000)
         sizeString = size + " bytes";
-    else if(size < 1000000)
-        sizeString = size/1000 + " kb";
-    else 
-        sizeString = size/1000000 + " Mb";
+    else if(size < 1000000){
+      calcSize = size/1000
+      sizeString = parseFloat(calcSize.toString()).toFixed(2) + " kb";
+    } 
+    else{
+      calcSize = size/1000000
+      sizeString = parseFloat(calcSize.toString()).toFixed(2) + " Mb";
+    }
     return sizeString;
   }
 
